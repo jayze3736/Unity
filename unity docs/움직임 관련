@@ -1,0 +1,2 @@
+# Rigidbody.MovePosition(Vector3 pos)
+fixedUpdate에서 사용되며, 캐릭터의 위치를 pos로 이동시킬때 프레임단위로 위치 이동이 자연스럽게 이어지도록 한다. 주로 pos에는 Time.deltaTime가 포함된다.(움직임이 자연스러워야 하니까) 
