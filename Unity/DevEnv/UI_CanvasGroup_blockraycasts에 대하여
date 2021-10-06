@@ -1,0 +1,4 @@
+CanvasGroup component의 blockraycast 옵션은 후면 그래픽의 입력을 차단하는데 주로 사용된다.
+쉽게 말하면 앞에 blockraycast옵션이 true인 UI 그래픽이 뒤에 있는 그래픽으로 향하는 raycast를 가로채므로 앞에 존재하는 UI만 입력을 받고 뒤에 존재하는 UI는
+raycast의 영향을 받지않게된다.
+반대로 blockraycast옵션이 false라면 앞에 그리고 뒤에까지 raycast가 투사되므로 클릭과 같은 입력을 받을 수 있다.
