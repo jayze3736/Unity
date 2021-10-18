@@ -1,0 +1,6 @@
+간단하게 말해서, layout group은 frame drop과 같은 퍼포먼스 저하때문에 UI element가 정적이고 개수가 적으면 layout group을 사용하지않는 것을 권장한다.
+그러나 배치해야할 UI element 개수가 100개 정도로 많고 동적으로 UI를 배치해야할 경우, 사용하면 효율은 증가한다.
+여담으로 grid layout group을 사용했을때 Scene에서는 UI가 서로 떨어져 보이지만 한 곳으로 모여진듯이 trigger가 해당 layout group 요소끼리 한번씩 검출되는 경우가 있었다.
+왜 이런지는 모르겠지만 layout group을 되도록이면 사용하지않는 것이 좋아보인다.
+
+참조: https://www.reddit.com/r/Unity3D/comments/bz4jjx/do_layoutgroups_still_have_awful_performance/
