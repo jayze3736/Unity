@@ -1,0 +1,4 @@
+RectTransformUtility.ScreenPointToLocalPointInRectangle(parentRectTrans, eventData.position, cam, out localpoint)\
+
+canvas 상에서 eventData pos가 존재하는지 확인하고 해당 포지션값을 canvas child의 local pos로 바꾸는 함수이다.
+이때 eventData.position 은 world 기준이 아니라 screen 기준의 위치값을 반환한다.
