@@ -1,0 +1,36 @@
+triggerEnter -> nextslot 갱신
+triggerExit -> alpha값 0으로 set
+OnPointerDown(마우스 클릭시 발생) -> x
+OnPointerUp(마우스 drag 해제시 발생) -> item 이동 및 alpha값 0으로 set
+Ondrag(drag 중일때 발생) -> slot위에 item 존재시 alpha값 0.3 set, 또는 그렇지 않을 경우에는 0으로 set
+
+방문을 열고 닫고하는 개념으로 시스템을 구축
+show 와 hide라는 함수를 만들고 show 함수는 여러개의 슬롯 중 한 slot에만 적용이 되어야하므로
+trigger enter -> nextslot과 collsion instance가 서로 다를 경우 -> nextslot의 alpha값을 0으로 초기화하고 
+collision instance의 alpha값을 0.3으로 set,
+어떠한 slot에도 닿지않았을 경우에는 값이 바뀌었던 alpha값을 0으로 set
+
+
+drag 해제시 모든 slot의 alpha값은 0이되어야하므로 이에대해서는 모든 slot에 대해 탐색하는 방법이 있다.
+
+이전의 문제점 -> triggerenter에서 collision 인자를 nextslot으로 지정하고
+exit에서는 해당 nextslot의 alpha를 0으로 초기화했었다.
+너무 drag가 빠르면 exit가 enter보다 나중에 실행된다.
+slot 1에서 slot 2로 넘어가는 과정이고 slot 1이 next slot일때
+slot 1의 exit -> slot 1의 alpha값 0 set -> slot 2의 enter
+순으로 예상하지만 drag가 너무 빠르면
+slot 2의 enter -> slot 1의 exit -> slot 2의 alpha값 0 set 이 일어난다.
+
+
+가장 좋은 해결책?
+1) shadow를 하나로 설정하고 필요할때마다 set active를 사용하고 parent를 바꾸는 방식
+2) Ondrag 함수에서 나타내는 pointEvent의 mouseposition위치에 slot이 있는지 체크하고 해당
+slot이 존재하면 거기로 shadow를 보내주는 방식
+
+
+결론
+OverlapPoint를 이용하여 해당 포인트위치(mouse cursor pos)에 inventory slot이 있는지 조사한다.
+만약에 있는 경우 prevSlot이라는 변수를 사용하여 새 slot으로 갱신하고 새 slot의 alpha값을 0.3으로 조정한다.
+만약 마우스 커서의 이동이 너무 빨라서 현재 slot -> null 영역(즉, 어떠한 slot도 존재하지않는 구역) -> 다음 slot으로 이동되지않고
+현재 slot -> 다음 slot으로 중간 null 영역을 거치지않는 경우에 대비하여 prevSlot이 갱신되기 전, 조사하는 새 slot과 prevSlot이 다를 경우(즉, 새 slot으로 이동할때)
+prevSlot(이제는 별 볼일 없는 slot)의 alpha값을 0으로 set하면 이전 문제를 해결할 수 있다고 결론내렸다.
