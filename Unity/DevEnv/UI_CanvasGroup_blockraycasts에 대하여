@@ -1,4 +1,12 @@
 CanvasGroup component의 blockraycast 옵션은 후면 그래픽의 입력을 차단하는데 주로 사용된다.
-쉽게 말하면 앞에 blockraycast옵션이 true인 UI 그래픽이 뒤에 있는 그래픽으로 향하는 raycast를 가로채므로 앞에 존재하는 UI만 입력을 받고 뒤에 존재하는 UI는
-raycast의 영향을 받지않게된다.
+쉽게 말하면 앞에 blockraycast옵션이 true인 UI 그래픽이 뒤에 있는 그래픽으로 향하는 raycast를 막으므로 뒤 UI나 그래픽은 ray를 받을 수 없다.
 반대로 blockraycast옵션이 false라면 raycast가 해당 UI를 그냥 통과해버리므로 앞의 UI는 입력을 받지못하고 후면 그래픽만 입력을 받을 수 있게된다.
+
+
+canvasGroup에서 blockraycast 옵션을 사용할때 image 컴포넌트가 필요하며 block 할 수 있는 범위는 image의 사이즈에 해당한다. 확인하고싶으면 rect tool(누르면 꼭짓점이
+파란색 점이고 테두리가 하얀색 선으로 된 빈 사각형이 그려지며 사이즈를 조절할 수 있는 도구)을 누르면 오브젝트가 어느 범위만큼 막을 수 있는지 확인할 수 있다.
+
+
+정리하면 UI가 겹치는 경우, 마우스 포인터의 입력을 맨 앞에 그려지는 UI만 받게하고싶으면
+1. 맨앞에 그려지는 UI에 canvas group을 추가하고 blockraycast 옵션을 true로 체크한다.
+2. 이때 image 컴포넌트가 필요하며 해당 image의 크기만큼 raycast를 block할 수 있다.
