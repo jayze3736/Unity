@@ -1,0 +1,15 @@
+1. Graphic Raycast는 canvas위에 UI element에 대한 입력(ex. 마우스 클릭)을 감시한다.
+2. Graphic Raycast가 없으면 canvas위에 존재하는 UI element들은 입력을 받지못한다.
+3. 보통 UI layout을 구성할때 UI가 서로 겹치는 경우가 있고 이 UI들의 보여지는 순서를 정하기위해 Sub canvas를 UI element의 parent로 만들고
+이 parent의 sorting order값을 바꾼다.
+이 sorting order값에 따라 Graphic Raycast의 priority도 정해지며 이는 마우스 클릭과 같은 입력이 발생했을때 어떠한 UI element가 우선적으로
+입력을 받아야될지 결정할 수 있음을 의미한다.
+
+4. Graphic Raycast에 대한 문서를 보면, 
+Ignore Reversed Graphics	레이캐스터가 후면 그래픽스를 무시할지 여부입니다.
+Blocked Objects	그래픽 레이캐스트를 막을 오브젝트 타입입니다.
+Blocking Mask 그래픽 레이캐스트를 막을 오브젝트 타입입니다.
+이렇게 써져있는데, 아직까진 이 옵션들을 바꿔서 변하는 것은 없고(설정을 잘못해서인가인지는 잘 모르겠음)
+그냥 graphic raycast를 가지고 있는 canvas들의 sorting order값에 따라 마우스 입력과 이벤트의 우선순위가 결정되는 것은 확실하다.
+
+
