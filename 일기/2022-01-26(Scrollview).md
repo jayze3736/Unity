@@ -20,3 +20,10 @@ UI element로 구성되어있는 prefab 또한 content로 정할 수 있다.
 ![제목 없음](https://user-images.githubusercontent.com/79313194/151147065-04809c94-97ac-4f3c-9b22-38be36e0ad65.png)
 
 
+## 고생했던 부분
+1. contents 중에서 savefile이라는 prefab이 있는데, 이 프리팹은 tmp(text mesh pro), button을 포함한다.
+
+위로 드래그를 하면 그 prefab은 다른 button contents와는 다르게 밖으로 삐져나오는 경우가 있었는데 처음에는 tmp가 일반 UI 요소가 아니라서 그런줄 알았다.
+
+
+알고보니 tmp와 button을 그리기 위한 canvas가 savefile에 컴포넌트로 부착되어있었고 contents의 canvas와 충돌이 발생해서 이러한 원치않는 결과를 얻게 되었다.
