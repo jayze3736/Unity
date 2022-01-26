@@ -10,9 +10,7 @@ ScrollView에서 viewport의 범위를 벗어날 정도의 수만큼 콘텐츠�
 
 ## Scrollview - content
 content는 실제 보여주는 콘텐츠들의 부모 오브젝트인데, 이때 콘텐츠들은 UI element여야한다.   
-즉, 일반 sprite는 보여줄 수 없고 UI image, UI button등 UI element들만 보여질 수 있으므로 주의해야한다.
-
-
+즉, 일반 sprite는 보여줄 수 없고 UI image, UI button등 UI element들만 보여질 수 있으므로 주의해야한다.   
 UI element로 구성되어있는 prefab 또한 content로 정할 수 있다.
 
 ![제목 없음](https://user-images.githubusercontent.com/79313194/151147065-04809c94-97ac-4f3c-9b22-38be36e0ad65.png)
