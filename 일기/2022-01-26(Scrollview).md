@@ -18,3 +18,5 @@ content는 실제 보여주는 콘텐츠들의 부모 오브젝트인데, 이때
 UI element로 구성되어있는 prefab 또한 content로 정할 수 있다.
 
 ![제목 없음](https://user-images.githubusercontent.com/79313194/151147065-04809c94-97ac-4f3c-9b22-38be36e0ad65.png)
+
+
