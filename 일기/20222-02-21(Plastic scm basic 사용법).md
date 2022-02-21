@@ -28,8 +28,17 @@
 발생해서 다시 되돌아가야한다면 해당 기능을 이용하면 복구가 가능하다.
 
 ## 체인지 세트 병합
+![제목 없음](https://user-images.githubusercontent.com/79313194/154910020-5ef924fa-fe43-47ef-af87-d8cc7454cbd2.png)
 
 브랜치로 갈라 나누어 작업을 분산 시, 다시 하나로 합쳐야 한다. 따라서 현재 워크스페이스에 병합하길 원하는 체인지 세트에 왼쪽 클릭 후 "이 체인지 세트에서 병합"을 누르면
 분산한 작업을 하나의 프로젝트로 병합하는 것이 가능하다.
 
-![제목 없음](https://user-images.githubusercontent.com/79313194/154910020-5ef924fa-fe43-47ef-af87-d8cc7454cbd2.png)
+## 체크인
+![image](https://user-images.githubusercontent.com/79313194/154911001-bd149696-f724-4e1b-8c7f-b62b3444cc5c.png)
+
+scene에 empty object를 추가하면 프로젝트 내에 변경사항이 생긴것이고 이 변경사항을 허용할 지 안 할지 묻는다. 여기서 체크인을 누르면 해당 변경을 허용하겠다는 의미가 되며 
+change set이 생긴다. 
+
+![제목 없음](https://user-images.githubusercontent.com/79313194/154911480-f1d096be-66ef-4f43-963d-94be105a2355.png)
+
+
