@@ -13,7 +13,7 @@ SceneManager.sceneLoaded는 이벤트 핸들러이며 가입한 이벤트가 씬
 Scene A -> Scene B로 씬 전환이 발생할때
 Scene A에서 SceneLoaded 로 함수를 가입시켰을때 Scene B에서 순서대로 Awake(), OnEnable(), Start()가 실행될때 가입시킨 이벤트는 생명주기내 언제 발생하는지 궁금했다.
 
-## 결과
+## 확인
 Scene A에 obj A를, Scene B에 obj B를 놓고 obj A에서 sceneLoaded event가 발생했음을 알리는 로그를 출력하는 이벤트를 가입시킨다.   
 obj B는 Awake(), OnEnable(), Start() 각각 실행 지점을 진입했다는 로그를 출력하도록 한다.
 
