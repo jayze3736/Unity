@@ -3,8 +3,9 @@
 ## ScneneManager.sceneLoaded
 SceneManager.sceneLoaded는 이벤트 핸들러이며 가입한 이벤트가 씬 로드후에 발생하도록 한다.   
    public static event UnityAction<Scene, LoadSceneMode> sceneLoaded;   
-   기본적으로 핸들러에 가입시킬 함수의 파라미터 또한 Scene, LoadeSceneMode로 맞춰야하는데, 어째서인지 파라메터에 관계없이 함수를 delegate로 wrap(delegate 블록 안에 함수를 넣음)
-   시키면 해당 이벤트가 가입될 수 있다.
+   기본적으로 핸들러에 가입시킬 함수의 파라미터 또한 Scene, LoadeSceneMode로 맞춰야하는데, delegate로 생성한 무명 메서드내에 sceneLoaded의 딜리게이트 파라메터(Scene, LoadeSceneMode)를 사용하지않을경우 파라메터를 생략하여 해당 무명 메서드를 이벤트 핸들러에 가입시킬 수 있다.
+
+참고: https://www.csharpstudy.com/CSharp/CSharp-anonymous-method.aspx
 
 ## 생명주기
 유니티내에서 실행되는 이벤트 함수는 Awake -> Onenable -> Start 순으로 실행된다.   
