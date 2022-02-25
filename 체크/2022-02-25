@@ -1,0 +1,7 @@
+오늘 한것: 
+Start Menu에서 saveload menu 프리팹을 그대로 썼는데, load목적만 필요한데 save mode 버튼은 필요없으므로
+그냥 save mode 랑 load 모드 버튼을 없애고
+popup창에 save load 버튼을 둬서 popup에서 동작하도록 하려고 생각중
+그리고 startmenu에서는 load 버튼만 둬서 load 기능만 하도록
+
+Timer를 만들어서 일정시간동안 무적이 될 수 있도록 기능구현
