@@ -4,6 +4,8 @@
 + Bind(): https://docs.unity3d.com/Packages/com.unity.ui@1.0/api/UnityEditor.UIElements.BindingExtensions.html#UnityEditor_UIElements_BindingExtensions_Bind_UnityEngine_UIElements_VisualElement_SerializedObject_
 + VisualElement: https://docs.unity3d.com/Packages/com.unity.ui@1.0/api/UnityEngine.UIElements.VisualElement.html?q=visualelement   
 + Selection 클래스 예제: https://popbox.tistory.com/107   
++ bindingpath: https://docs.unity3d.com/ScriptReference/UIElements.BindableElement-bindingPath.html
++ YAML(bindingpath와 연관): https://docs.unity3d.com/kr/530/Manual/FormatDescription.html
 
 ```C#
 using UnityEditor;
