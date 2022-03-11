@@ -1,0 +1,8 @@
+데이터 바인딩 에셋 api
+
+about: DataNode로 구성된 DataTree 이해
+IDataNode.cs - https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataNode.cs
+DataNode.cs - https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/DataNode.cs
+Context.cs - https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/Context.cs
+BranchDataNode.cs - https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/BranchDataNode.cs
+DataTree.cs - https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/DataTree.cs
