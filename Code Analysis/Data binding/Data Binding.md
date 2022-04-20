@@ -59,6 +59,11 @@ https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Sla
 
 ### Context
 #### 경로 접근
+DataTree.cs의 ResolvePath -> DataNode의 FindDescendant -> BranchDataNode의 FindDescendant 오버로드 -> BDN의 GetOrCreateChild 
+-> BDN의 Getchild ->  FirstOrDefault -> 조건에 부합하는 child 반환(DataNode)
+or
+-> BDN의 Getchild가 null이면 CreateChild -> Child 생성
+
 #### 
 
 ### Property
