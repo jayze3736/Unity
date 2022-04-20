@@ -1,9 +1,9 @@
 # Data Binding
 
 ## Data Binding이란?
+logic(data)과 presentation를 분리하고 logic 데이터와 presentation을 동기화시키는 것을 의미한다. 
 
 ## Data Binding을 사용하는 이유
-
 프로그램 외부에서 Text값이 변경될 경우, 프로그램 코드가 변경사항으로 인해 에러가 발생할 수 있는 것처럼
 디자인 작업은 보통 코드로 작업하지않고 개발 환경에서 직접 디자인을 하기때문에 자주 변경사항이 생길 수 있다.
 
@@ -14,7 +14,8 @@
 이에 반해 data binding 은 view에서 변경이 일어나도 코드 실행전에 결합이 이루어지기때문에 logic data에 반영시킬 수가 있다.
 
 ## Unity의 Data Binding
-
+https://bitbucket.org/coeing/data-bind/src/main/
+Data binding Asset의 library
 
 ## Data Binding의 프레임 워크
 
