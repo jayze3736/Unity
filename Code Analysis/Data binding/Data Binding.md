@@ -44,17 +44,17 @@ logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될
 https://bitbucket.org/coeing/data-bind/src/main/
 
 ### Data Node
-IDataNode
+IDataNode   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataNode.cs
 
-DataNode
+DataNode   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/DataNode.cs
 
-BranchDataNode
+BranchDataNode   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/BranchDataNode.cs
 
 
-### Data Tree
+### Data Tree   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/DataTree.cs
 
 ### Context
