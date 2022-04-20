@@ -55,3 +55,21 @@ logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될
 ### TypeinfoUtils
 ### 
 
+
+
+## 새로이 알게된 것
+
+### ?? 연산자
+https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator
+
+(함수 1) ?? (함수 2) -> 함수 1이 null이 아니라면 함수 1을 반환하고 함수 1이 null이라면 함수 2를 반환한다.
+
+### Enumerable.FirstOrDefault
+https://docs.microsoft.com/ko-kr/dotnet/api/system.linq.enumerable.firstordefault?view=net-6.0#system-linq-enumerable-firstordefault-1(system-collections-generic-ienumerable((-0)))
+
+FirstOrDefault는 Enumerable에서 첫번째 요소를 반환하고 만약 요소가 존재하지않으면 Default값을 반환한다. 원하는 Default값을 지정하고 반환시키는 것이 가능하다.   
+반환형은 T이다.  
+Enumrable.FirstOrDefault(임시 변수명 => (임시 변수명을 포함한 조건식)); -> 여기서 임시 변수명은 Enumrable의 element에 해당하며 조건식에 부합하는 데이터를 종합해서 
+그중 첫번째 요소를 반환한다.
+ex) names.FirstOrDefault(name => name.Length > 20);
+길이가 20자가 넘는 이름을 종합하고 그 중 첫번째(먼저 찾은) 이름을 반환한다. 이때 존재하지않으면 기본값(Default)를 반환한다.
