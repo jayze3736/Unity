@@ -1,6 +1,7 @@
 1. Data binding 분석을 통해 얻고자하는 것(목표)
 - 프로젝트 진행자의 코드 스타일과 팁
 - Data binding의 구현 메커니즘 이해
+- Data binding 실제 구현
 
 2. Data binding을 분석하기 위한 단계
 - Game logic 과 presentation의 관계
