@@ -13,10 +13,28 @@ logic(data)과 presentation를 분리하고 logic 데이터와 presentation을 �
 이처럼 코드 실행중에 view와 logic data가 결합이되면 즉, 프로그래밍적 선언을 사용하면 view의 변경을 logic data는 반영하지않을 수 있기때문에 문제가 발생한다.
 이에 반해 data binding 은 view에서 변경이 일어나도 코드 실행전에 결합이 이루어지기때문에 logic data에 반영시킬 수가 있다.
 
-## Unity의 Data Binding
+## Unity의 Data Binding & library
 https://bitbucket.org/coeing/data-bind/src/main/
 Data binding Asset의 library
 
+## Data Binding 관련 문서(누가 정리해놓은 글)
+The "Magic" behind Data Binding (Part 1)
+https://www.evernote.com/shard/s722/client/snv?noteGuid=d0d62cea-df58-4ce1-a3eb-edeeba873231&noteKey=022d8d79eb0c5aa6&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2Fd0d62cea-df58-4ce1-a3eb-edeeba873231%2F022d8d79eb0c5aa6&title=The%2B%2522Magic%2522%2Bbehind%2BData%2BBinding%2B%2528Part%2B1%2529
+
+The "Magic" behind Data Binding (Part 2: Commands and Data Tree)
+https://www.evernote.com/shard/s722/client/snv?noteGuid=9f981bcb-b6e6-4612-98a5-245361012239&noteKey=23d5877b474725fd&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2F9f981bcb-b6e6-4612-98a5-245361012239%2F23d5877b474725fd&title=The%2B%2522Magic%2522%2Bbehind%2BData%2BBinding%2B%2528Part%2B2%253A%2BCommands%2Band%2BData%2BTree%2529
+
+UI Window Management in Unity 5.3 with Data Bind (Part 3)
+https://www.evernote.com/shard/s722/client/snv?noteGuid=69437cdd-ac2a-420f-a78b-9992e5e1aacd&noteKey=cc030f17d4e1df99&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2F69437cdd-ac2a-420f-a78b-9992e5e1aacd%2Fcc030f17d4e1df99&title=UI%2BWindow%2BManagement%2Bin%2BUnity%2B5.3%2Bwith%2BData%2BBind%2B%2528Part%2B3%2529
+
+
 ## Data Binding의 프레임 워크
 
-## 
+### Data Node
+### Tree
+### Context
+### Property
+### Reflection
+### TypeinfoUtils
+### 
+### 
