@@ -28,13 +28,30 @@ UI Window Management in Unity 5.3 with Data Bind (Part 3)
 https://www.evernote.com/shard/s722/client/snv?noteGuid=69437cdd-ac2a-420f-a78b-9992e5e1aacd&noteKey=cc030f17d4e1df99&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2F69437cdd-ac2a-420f-a78b-9992e5e1aacd%2Fcc030f17d4e1df99&title=UI%2BWindow%2BManagement%2Bin%2BUnity%2B5.3%2Bwith%2BData%2BBind%2B%2528Part%2B3%2529
 
 
+## Data Binding의 메커니즘
+
+### Unity 환경에서 view와 logic은 어떻게 연결되는가?
+view에서 데이터가 변경될경우 logic은 해당 변경사항을 적용시킬 수 있어야됨, view에서 어떠한 이벤트가 발생했을때 logic에서 이를 처리할 수 있어야함
+logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될때 view를 동기화시킬 수 있어야함
+-> view의 데이터 변경 명령을 어떻게 logic 측에 알릴 것인가?
+-> view의 오브젝트와 logic의 변수를 어떻게 바인딩할 것인가?
+-> 
+
+###  
+
 ## Data Binding의 프레임 워크
 
 ### Data Node
 ### Tree
 ### Context
+#### 경로 접근
+#### 
+
 ### Property
+#### Wrapper 클래스
+#### Event
+
 ### Reflection
 ### TypeinfoUtils
 ### 
-### 
+
