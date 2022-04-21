@@ -29,6 +29,10 @@ https://www.evernote.com/shard/s722/client/snv?noteGuid=69437cdd-ac2a-420f-a78b-
 
 
 ## Data Binding의 메커니즘
+1. presentation -> logic: presentation 측에서 변경이 일어났을때 logic측에 변경했음을 알리고 이에 대한 처리가 이루어져야함
+2. logic -> presentation: logic의 데이터를 presentation에 표시하고 동기화가 가능해야함
+
+
 
 ### Unity 환경에서 view와 logic은 어떻게 연결되는가?
 view에서 데이터가 변경될경우 logic은 해당 변경사항을 적용시킬 수 있어야됨, view에서 어떠한 이벤트가 발생했을때 logic에서 이를 처리할 수 있어야함
