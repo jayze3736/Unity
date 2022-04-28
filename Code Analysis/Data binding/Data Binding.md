@@ -142,13 +142,13 @@ Context의 메소드에 대한 인터페이스가 구현되어있다.
 public interface IDataContext
     {
         
-        object GetValue(string path); //Resolvepath 함수를 통해 path에 저장되어있는 데이터를 DataTree로부터 반환한다.
+        object GetValue(string path); //Resolvepath 함수를 통해 path에 저장되어있는 데이터 노드를 DataTree로부터 반환한다.
         
-        object RegisterListener(string path, Action<object> onValueChanged); //path에 저장된 데이터 노드를 
+        object RegisterListener(string path, Action<object> onValueChanged); //path에 저장된 데이터 노드에 값 변경시 발생할 이벤트를 추가
         
-        void RemoveListener(string path, Action<object> onValueChanged); //
+        void RemoveListener(string path, Action<object> onValueChanged); //paht에 저장된 데이터 노드에서 값 변경시 발생할 이벤트를 제거
 
-        void SetValue(string path, object value); //
+        void SetValue(string path, object value); ///Resolvepath 함수를 통해 DataTree의 path에 저장되어있는 데이터 노드에 값을 대입 
     }
 
 ```
