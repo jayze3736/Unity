@@ -44,36 +44,124 @@ logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될
 ###  
 
 ## Data Binding의 프레임 워크
+
+```C
+// -------------------------------------------------------------------------------------------------------------------
+//   Copyright (c) Slash Games. All rights reserved.
+// --------------------------------------------------------------------------------------------------------------------
+```
+
 소스 코드 라이브러리 주소
 https://bitbucket.org/coeing/data-bind/src/main/
 
 ### Data Node
-IDataNode   
+DataTree에서 logic의 데이터를 관리하기 위한 기본 단위
+
+#### IDataNode   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataNode.cs
 
-DataNode   
+#### DataNode   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/DataNode.cs
 
-BranchDataNode   
+#### BranchDataNode   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/BranchDataNode.cs
 
 
-### Data Tree   
+
+
+
+### Data Tree
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/DataTree.cs
 
+Context 
+
+
 ### Context
+컨텍스트 클래스는 프로퍼티를 관리하고 경로에 접근하여 데이터를 반환하고 대입하는 메소드를 보유하고 있다.
+view에서 보여주는 UI의 큰 문맥이 되며 프로퍼티의 집합이 된다. 예를 들어 인벤토리 UI가 view에서 보여줄때 인벤토리라는 큰 문맥이 하나의 Context가 되며 인벤토리 UI 안에서
+보여주는 여러가지 UI element들(버튼, 이미지, 드래그 이벤트 등...)은 각각 프로퍼티에 해당한다 볼 수 있다. 그리고 이 프로퍼티들은 
+
+Context:
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/Context.cs
+
+IDataContext:
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataContext.cs
+
+#### IDataContext
+Context의 메소드에 대한 인터페이스가 구현되어있다.
+
+``` C#
+public interface IDataContext
+    {
+        
+        object GetValue(string path); //Resolvepath 함수를 통해 path에 저장되어있는 데이터를 DataTree로부터 반환한다.
+        
+        object RegisterListener(string path, Action<object> onValueChanged); //path에 저장
+        
+        void RemoveListener(string path, Action<object> onValueChanged); //
+
+        void SetValue(string path, object value); //
+    }
+
+```
+
+
+
 #### 경로 접근
 DataTree.cs의 ResolvePath -> DataNode의 FindDescendant -> BranchDataNode의 FindDescendant 오버로드 -> BDN의 GetOrCreateChild 
 -> BDN의 Getchild ->  FirstOrDefault -> 조건에 부합하는 child 반환(DataNode)
 or
 -> BDN의 Getchild가 null이면 CreateChild -> Child 생성
 
-#### 
 
 ### Property
-#### Wrapper 클래스
-#### Event
+프로퍼티 클래스는 단순한 Wrapper 클래스이자 값이 변경되었을때 이벤트를 발생시켜서 내부값이 변경되었음을 view에 알린다.
 
+IDataProvider:
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataProvider.cs
+
+Property:
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/Property.cs
+
+#### Wrapper 클래스 & Event
+
+```C#
+데이터 값을 Value 프로퍼티로 감싸고 있고 감싼 데이터의 값이 변경되면 설정된 이벤트를 발생시키도록 하고 있다.
+public class Property : IDataProvider
+{...
+        #region Fields
+
+        /// <summary>
+        ///     Current data value.
+        /// </summary>
+        private object value;
+
+        #endregion
+        
+        ...
+        
+        public object Value
+        {
+            get
+            {
+                return this.value;
+            }
+            set
+            {
+                var changed = !Equals(this.value, value);
+                if (!changed)
+                {
+                    return;
+                }
+
+                this.value = value;
+
+                this.OnValueChanged();  //이벤트 발생
+            }
+        }
+}
+
+```
 ### Reflection
 ### TypeinfoUtils
 ### 
