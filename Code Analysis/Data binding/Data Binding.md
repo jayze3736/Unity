@@ -1,9 +1,42 @@
 # Data Binding
 
-## Data Binding이란?
-logic(data)과 presentation를 분리하고 logic 데이터와 presentation을 동기화시키는 것을 의미한다. 
+## Data Binding 
+Data source와 visual element를 결합 또는 동기화시키는 방법
 
-## Data Binding을 사용하는 이유
+## Data Binding 장점
+### - 1. 코드 길이 감소 -
+#### 안드로이드의 경우
+findviewbyid 함수로 위젯을 찾고 텍스트값을 setText 함수를 호출하여 값을 대입한다.   
+
+``` java
+TextView textView = findViewById(R.id.sample_text);
+    textView.setText(viewModel.getUserName());
+```
+data binding을 사용하면 xml 코드 하나로 위의 코드를 작성할 필요가 없어진다.
+
+``` xml
+<TextView
+        android:text="@{viewmodel.userName}" />
+```
+
+코드 작성없이 view에서 text값을 가져오게 만들면 위 코드 작성없이(오브젝트를 찾고 대입하는 과정 없이) text를 set하는 것이 가능하다.
+
+#### 유니티의 경우
+어떤 변수값을 텍스트 필드에 표시하려면 텍스트 필드를 찾아서 참조해야한다. 
+
+``` C#
+TextField textfield = Find();   // UI object 참조
+String str = "...";
+textfield.setText(str);         // 대입
+```
+
+databinding을 통해 textfield가 str값을 가져와서 자신의 textfield에 set한다. 위 코드가 필요없다.
+
+만약 극단적으로 텍스트 필드가 100만개가 존재하면 위의 3줄의 코드를 100만번 실행해야한다. 그러나 데이터바인딩을 통해서 Textfield와 datasource의 str값이 결합하게되면 그럴 필요가 없어진다.   
+또한 str값의 변경이 일어나서 textfield의 값을 바꿔야되는 경우 이 경우에도 처리 코드가 늘어나는데, 데이터바인딩을 사용하면 str과 textfield가 서로 동기화되어있으므로 처리 코드를 매우 줄일 수 있다.
+
+
+### - 2. 유지 보수 -
 프로그램 외부에서 Text값이 변경될 경우, 프로그램 코드가 변경사항으로 인해 에러가 발생할 수 있는 것처럼
 디자인 작업은 보통 코드로 작업하지않고 개발 환경에서 직접 디자인을 하기때문에 자주 변경사항이 생길 수 있다.
 
@@ -28,20 +61,18 @@ UI Window Management in Unity 5.3 with Data Bind (Part 3)
 https://www.evernote.com/shard/s722/client/snv?noteGuid=69437cdd-ac2a-420f-a78b-9992e5e1aacd&noteKey=cc030f17d4e1df99&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2F69437cdd-ac2a-420f-a78b-9992e5e1aacd%2Fcc030f17d4e1df99&title=UI%2BWindow%2BManagement%2Bin%2BUnity%2B5.3%2Bwith%2BData%2BBind%2B%2528Part%2B3%2529
 
 
-## Data Binding의 메커니즘
-1. presentation -> logic: presentation 측에서 변경이 일어났을때 logic측에 변경했음을 알리고 이에 대한 처리가 이루어져야함
-2. logic -> presentation: logic의 데이터를 presentation에 표시하고 동기화가 가능해야함
+## Data Binding에서 필요한 기능
+1. presentation에서 command(이벤트)를 수행시킬 수 있고 logic의 값을 변경시킬 수 있어야한다.   
+2. logic은 presentation에게 데이터 제공 및 동기화할 수 있어야한다. 그리고 제공받은 데이터를 presentation에서 set할 수 있어야한다.
 
 
 
 ### Unity 환경에서 view와 logic은 어떻게 연결되는가?
-view에서 데이터가 변경될경우 logic은 해당 변경사항을 적용시킬 수 있어야됨, view에서 어떠한 이벤트가 발생했을때 logic에서 이를 처리할 수 있어야함
-logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될때 view를 동기화시킬 수 있어야함
--> view의 데이터 변경 명령을 어떻게 logic 측에 알릴 것인가?
--> view의 오브젝트와 logic의 변수를 어떻게 바인딩할 것인가?
+view에서 데이터가 변경될경우 logic은 해당 변경사항을 적용시킬 수 있어야됨, view에서 어떠한 이벤트가 발생했을때 logic에서 이를 처리할 수 있어야함   
+logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될때 view를 동기화시킬 수 있어야함     
+-> view의 데이터 변경 명령을 어떻게 logic 측에 알릴 것인가?   
+-> view의 오브젝트와 logic의 변수를 어떻게 바인딩할 것인가?  
 
-
-###  
 
 ## Data Binding의 프레임 워크
 
