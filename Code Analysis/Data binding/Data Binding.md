@@ -238,16 +238,25 @@ UI elements는 기본적으로 이벤트 리스너를 보유하고 있으며 클
 데이터 바인딩은 코드 작성없이 이벤트와 버튼 오브젝트간의 링크를 유지시키기때문에 이러한 문제를 모두 해결한다.   
 Command 클래스는 이벤트 처리기의 링크를 유지시키기 위한 클래스를 의미한다.
 
+### InvokeCommand(params object [] args)
+Command 클래스의 중요 메소드로, Command 클래스에서 사용할 커맨드를 데이터 트리로부터 찾고 해당 이벤트를 실행시킨다.
+params object [] args 로부터 기본 인자를 받고 hierachy에서 public DataProvider[] AdditionalArguments; 변수값을 추가로 전달하여 이벤트 메소드를 실행시킨다.
+InvokeCommand()에는 두가지 매개변수 리스트를 하나로 합치며 처리하는 메소드이다. 
+
+
 
 ### ButtonClickCommand.cs 분석
+버튼 컴포넌트를 데이터 바인딩을 이용하여 리스너에 이벤트를 추가하기까지의 과정을 분석해보자.
 
 #### 상속 관계
 
 ![1](https://user-images.githubusercontent.com/79313194/167785379-9d1ba4eb-93dc-4773-9cb2-c82ea0965b23.png)
 
+
 #### 이벤트 리스너에 Command 설정 과정
 
 ![2](https://user-images.githubusercontent.com/79313194/167785527-99e3dd62-e0ff-45e5-afeb-4e90d8f00002.png)
+
 
 
 #### 경로 접근
