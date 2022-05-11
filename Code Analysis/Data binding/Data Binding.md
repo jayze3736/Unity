@@ -132,12 +132,6 @@ https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Sla
 ### Property
 프로퍼티 클래스는 단순한 Wrapper 클래스이자 값이 변경되었을때 이벤트를 발생시켜서 내부값이 변경되었음을 view에 알린다.
 
-IDataProvider:
-https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataProvider.cs
-
-Property:
-https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/Property.cs
-
 #### Wrapper 클래스 & Event
 데이터 값을 Value 프로퍼티로 감싸고 있고 감싼 데이터의 값이 변경되면 설정된 이벤트를 발생시키도록 하고 있다.
 
@@ -178,17 +172,49 @@ public class Property : IDataProvider
 
 ```
 
+#### Library Link
+IDataProvider:
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataProvider.cs
+
+Property:
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/Property.cs
+
 
 ### Context
-컨텍스트 클래스는 프로퍼티를 관리하고 경로에 접근하여 데이터를 반환하고 대입하는 메소드를 보유하고 있다.
-view에서 보여주는 UI의 큰 문맥이 되며 프로퍼티의 집합이 된다. 예를 들어 인벤토리 UI가 view에서 보여줄때 인벤토리라는 큰 문맥이 하나의 Context가 되며 인벤토리 UI 안에서
-보여주는 여러가지 UI element들(버튼, 이미지, 드래그 이벤트 등...)은 각각 프로퍼티에 해당한다 볼 수 있다.  
+컨텍스트 클래스는 프로퍼티의 집합이자 하나의 관리 창(프레임)이다.   
+데이터 트리에서 경로를 따라 데이터에 접근하여 값을 반환하고 대입하는 메소드를 보유하고 있다.
+예를 들어 인벤토리 UI를 보여줄때 인벤토리를 구성하는 데이터의 틀이 Data Context가 되며 인벤토리 UI 안에서 보여주는 여러가지 UI element들(버튼, 이미지, 드래그 이벤트 등...)은 각각 프로퍼티에 해당한다 볼 수 있다.
 
+#### 예시
+```C#
+ public class InventoryContext : Context
+    {
+        #region Fields
+
+        private readonly Property<Collection<InventoryItemContext>> slotsProperty =
+            new Property<Collection<InventoryItemContext>>(new Collection<InventoryItemContext>());
+            ...
+```
+
+```C#
+ public class InventoryItemContext : Context
+    {
+        #region Fields
+
+        private readonly Property<int> amountProperty = new Property<int>();
+
+        private readonly Property<string> typeIdProperty = new Property<string>();
+        ...
+```
+
+
+#### Library Link
 Context:
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/Context.cs
 
 IDataContext:
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataContext.cs
+
 
 #### IDataContext
 Context의 메소드에 대한 인터페이스가 구현되어있다.
