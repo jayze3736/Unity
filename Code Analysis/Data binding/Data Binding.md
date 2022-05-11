@@ -254,7 +254,8 @@ InvokeCommand()에는 두가지 매개변수 리스트를 하나로 합치며 �
 <details>
     <summary> Code </summary>
     
-``` C#
+    
+```C#
     public void InvokeCommand(params object[] args)
         {
             if (this.command == null)
@@ -398,3 +399,7 @@ Enumrable.FirstOrDefault(임시 변수명 => (임시 변수명을 포함한 조�
 그중 첫번째 요소를 반환한다.
 ex) names.FirstOrDefault(name => name.Length > 20);
 길이가 20자가 넘는 이름을 종합하고 그 중 첫번째(먼저 찾은) 이름을 반환한다. 이때 존재하지않으면 기본값(Default)를 반환한다.
+    
+
+### 
+ 
