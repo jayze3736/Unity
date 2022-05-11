@@ -251,6 +251,97 @@ Command 클래스의 중요 메소드로, Command 클래스에서 사용할 커�
 params object [] args 로부터 기본 인자를 받고 hierachy에서 public DataProvider[] AdditionalArguments; 변수값을 추가로 전달하여 이벤트 메소드를 실행시킨다.
 InvokeCommand()에는 두가지 매개변수 리스트를 하나로 합치며 처리하는 메소드이다. 
 
+<details>
+    <summary> Code </summary>
+```C#
+    public void InvokeCommand(params object[] args)
+        {
+            if (this.command == null)
+            {
+                return;
+            }
+
+            // Add additional arguments if there are any.
+            var commandArgs = args;
+            var additionalArgCount = this.AdditionalArguments.Length;
+            if (additionalArgCount > 0)
+            {
+                var argList = new List<object>();
+                argList.AddRange(args);
+                argList.AddRange(
+                    this.AdditionalArguments.Select(
+                        additionArgument => additionArgument != null ? additionArgument.Value : null));
+                commandArgs = argList.ToArray();
+            }
+
+            // Use default parameters if more are required than provided.
+            var methodInfo = TypeInfoUtils.GetMethodInfo(this.command);
+            var parameterInfos = methodInfo.GetParameters();
+            if (parameterInfos.Length > commandArgs.Length)
+            {
+                var argList = new List<object>();
+                argList.AddRange(commandArgs);
+                for (var index = commandArgs.Length; index < parameterInfos.Length; index++)
+                {
+                    var parameterInfo = parameterInfos[index];
+                    var defaultValue = TypeInfoUtils.IsValueType(parameterInfo.ParameterType)
+                        ? Activator.CreateInstance(parameterInfo.ParameterType)
+                        : null;
+                    argList.Add(defaultValue);
+                }
+
+                commandArgs = argList.ToArray();
+            }
+            // Skip base arguments if less are required.
+            else if (parameterInfos.Length < commandArgs.Length)
+            {
+                var argList = new List<object>();
+
+                var baseArgCount = parameterInfos.Length - additionalArgCount;
+                for (var index = 0; index < baseArgCount; index++)
+                {
+                    argList.Add(args[index]);
+                }
+
+                // Add additional arguments.
+                argList.AddRange(
+                    this.AdditionalArguments.Select(
+                        additionArgument => additionArgument != null ? additionArgument.Value : null));
+
+                commandArgs = argList.ToArray();
+            }
+
+            try
+            {
+                // Invoke delegate.
+                this.command.DynamicInvoke(commandArgs);
+            }
+            catch (Exception e)
+            {
+                if (e is ArgumentException || e is TargetParameterCountException)
+                {
+                    Debug.LogError(
+                        string.Format(
+                            "Couldn't invoke command '{0}' with arguments: [{1}]. (Exception: {2})",
+                            this.Path,
+                            commandArgs.Aggregate(
+                                string.Empty,
+                                (text, arg) => (string.IsNullOrEmpty(text) ? string.Empty : text + ", ")
+                                               + (arg != null ? arg.ToString() : "null")),
+                            e),
+                        this);
+                }
+                else
+                {
+                    throw;
+                }
+            }
+        }
+   
+```
+   </details>
+
+
 #### Library Link
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Foundation/Commands/Command.cs
 
