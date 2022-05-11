@@ -109,7 +109,7 @@ logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될
 소스 코드 라이브러리 주소
 https://bitbucket.org/coeing/data-bind/src/main/
 
-### Data Node
+## Data Node
 DataTree에서 logic의 데이터를 관리하기 위한 기본 단위
 
 #### IDataNode   
@@ -121,15 +121,11 @@ https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Sla
 #### BranchDataNode   
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/BranchDataNode.cs
 
-
-
-
-
 ### Data Tree
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/DataTree.cs
 
 
-### Property
+## Property
 프로퍼티 클래스는 단순한 Wrapper 클래스이자 값이 변경되었을때 이벤트를 발생시켜서 내부값이 변경되었음을 view에 알린다.
 
 #### Wrapper 클래스 & Event
@@ -180,7 +176,7 @@ Property:
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/Property.cs
 
 
-### Context
+## Context
 컨텍스트 클래스는 프로퍼티의 집합이자 하나의 관리 창(프레임)이다.   
 데이터 트리에서 경로를 따라 데이터에 접근하여 값을 반환하고 대입하는 메소드를 보유하고 있다.
 예를 들어 인벤토리 UI를 보여줄때 인벤토리를 구성하는 데이터의 틀이 Data Context가 되며 인벤토리 UI 안에서 보여주는 여러가지 UI element들(버튼, 이미지, 드래그 이벤트 등...)은 각각 프로퍼티에 해당한다 볼 수 있다.
@@ -234,6 +230,24 @@ public interface IDataContext
 
 ```
 
+## Command
+UI elements는 기본적으로 이벤트 리스너를 보유하고 있으며 클릭 이벤트, 입력 이벤트 등 I/O 장치로부터 입력을 받고 이벤트를 발생시킨다.
+대표적인 경우로 버튼 오브젝트는 onclick이라는 리스너에 이벤트를 추가해서 버튼을 클릭했을때 해당 이벤트를 실행시킨다.
+유니티의 경우 스크립트에서 코드상으로 이벤트를 추가시키는 방법과 hierachy에서 이벤트를 지정하는 방법이 있는데, 전자의 경우에는 객체 의존성이 존재하며 코드 길이가 늘어나고
+후자의 방법은 외부에서 오브젝트 변경이 일어났을때 설정한 이벤트가 초기화되는 문제가 존재한다.
+데이터 바인딩은 코드 작성없이 이벤트와 버튼 오브젝트간의 링크를 유지시키기때문에 이러한 문제를 모두 해결한다.   
+Command 클래스는 이벤트 처리기의 링크를 유지시키기 위한 클래스를 의미한다.
+
+
+### ButtonClickCommand.cs 분석
+
+#### 상속 관계
+
+![1](https://user-images.githubusercontent.com/79313194/167785379-9d1ba4eb-93dc-4773-9cb2-c82ea0965b23.png)
+
+#### 이벤트 리스너에 Command 설정 과정
+
+![2](https://user-images.githubusercontent.com/79313194/167785527-99e3dd62-e0ff-45e5-afeb-4e90d8f00002.png)
 
 
 #### 경로 접근
