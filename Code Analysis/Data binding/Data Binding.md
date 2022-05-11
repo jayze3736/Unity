@@ -253,7 +253,8 @@ InvokeCommand()에는 두가지 매개변수 리스트를 하나로 합치며 �
 
 <details>
     <summary> Code </summary>
-```C#
+    
+``` C#
     public void InvokeCommand(params object[] args)
         {
             if (this.command == null)
@@ -338,8 +339,9 @@ InvokeCommand()에는 두가지 매개변수 리스트를 하나로 합치며 �
             }
         }
    
+   
 ```
-   </details>
+</details>
 
 
 #### Library Link
