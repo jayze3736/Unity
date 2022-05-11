@@ -243,6 +243,9 @@ Command 클래스의 중요 메소드로, Command 클래스에서 사용할 커�
 params object [] args 로부터 기본 인자를 받고 hierachy에서 public DataProvider[] AdditionalArguments; 변수값을 추가로 전달하여 이벤트 메소드를 실행시킨다.
 InvokeCommand()에는 두가지 매개변수 리스트를 하나로 합치며 처리하는 메소드이다. 
 
+#### Library Link
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Foundation/Commands/Command.cs
+
 
 
 ### ButtonClickCommand.cs 분석
@@ -256,6 +259,11 @@ InvokeCommand()에는 두가지 매개변수 리스트를 하나로 합치며 �
 #### 이벤트 리스너에 Command 설정 과정
 
 ![2](https://user-images.githubusercontent.com/79313194/167785527-99e3dd62-e0ff-45e5-afeb-4e90d8f00002.png)
+
+1. 버튼 오브젝트에 ButtonClickCommand.cs를 추가한다.
+2. target(from NguiEventCommand)변수에 버튼 오브젝트를 링킹한다.
+3. 찾고자하는 command의 path를 설정한다.
+4. 설정한 path를 따라 command를 찾은 경우 버튼 클릭시 해당 커맨드가 실행된다.
 
 
 
