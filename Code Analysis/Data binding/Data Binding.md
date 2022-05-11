@@ -68,6 +68,9 @@ https://bitbucket.org/coeing/data-bind/src/main/
 Data binding Asset의 library
 
 ## Data Binding 관련 문서(누가 정리해놓은 글)
+<details>
+    <summary> Document link </summary>
+    
 The "Magic" behind Data Binding (Part 1)
 https://www.evernote.com/shard/s722/client/snv?noteGuid=d0d62cea-df58-4ce1-a3eb-edeeba873231&noteKey=022d8d79eb0c5aa6&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2Fd0d62cea-df58-4ce1-a3eb-edeeba873231%2F022d8d79eb0c5aa6&title=The%2B%2522Magic%2522%2Bbehind%2BData%2BBinding%2B%2528Part%2B1%2529
 
@@ -77,6 +80,7 @@ https://www.evernote.com/shard/s722/client/snv?noteGuid=9f981bcb-b6e6-4612-98a5-
 UI Window Management in Unity 5.3 with Data Bind (Part 3)
 https://www.evernote.com/shard/s722/client/snv?noteGuid=69437cdd-ac2a-420f-a78b-9992e5e1aacd&noteKey=cc030f17d4e1df99&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2F69437cdd-ac2a-420f-a78b-9992e5e1aacd%2Fcc030f17d4e1df99&title=UI%2BWindow%2BManagement%2Bin%2BUnity%2B5.3%2Bwith%2BData%2BBind%2B%2528Part%2B3%2529
 
+</details>
 
 ## Data Binding의 기능
 1. presentation에서 command(이벤트)를 수행시킬 수 있고 logic의 값을 변경시킬 수 있다.
@@ -131,6 +135,9 @@ https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Sla
 #### Wrapper 클래스 & Event
 데이터 값을 Value 프로퍼티로 감싸고 있고 감싼 데이터의 값이 변경되면 설정된 이벤트를 발생시키도록 하고 있다.
 
+<details>
+    <summary> Code </summary>
+    
 ```C#
 public class Property : IDataProvider
 {...
@@ -167,6 +174,7 @@ public class Property : IDataProvider
 }
 
 ```
+</details>
 
 #### Library Link
 IDataProvider:
