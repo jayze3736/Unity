@@ -248,7 +248,7 @@ https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Sla
 
 
 
-### ButtonClickCommand.cs 분석
+## ButtonClickCommand.cs 분석
 버튼 컴포넌트를 데이터 바인딩을 이용하여 리스너에 이벤트를 추가하기까지의 과정을 분석해보자.
 
 #### 상속 관계
