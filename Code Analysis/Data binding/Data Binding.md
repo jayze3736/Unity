@@ -1,7 +1,8 @@
 # Data Binding
 
 ## Data Binding 
-Data source와 visual element를 결합 또는 동기화시키는 방법
+Data source와 visual element를 결합 또는 동기화시키는 방법  
+view 오브젝트와 data source가 직접 연결되어있지않고 분리되어있으며 
 
 ## Data Binding 장점
 ### - 1. 코드 길이 감소 -
@@ -61,17 +62,24 @@ UI Window Management in Unity 5.3 with Data Bind (Part 3)
 https://www.evernote.com/shard/s722/client/snv?noteGuid=69437cdd-ac2a-420f-a78b-9992e5e1aacd&noteKey=cc030f17d4e1df99&sn=https%3A%2F%2Fwww.evernote.com%2Fshard%2Fs722%2Fsh%2F69437cdd-ac2a-420f-a78b-9992e5e1aacd%2Fcc030f17d4e1df99&title=UI%2BWindow%2BManagement%2Bin%2BUnity%2B5.3%2Bwith%2BData%2BBind%2B%2528Part%2B3%2529
 
 
-## Data Binding에서 필요한 기능
-1. presentation에서 command(이벤트)를 수행시킬 수 있고 logic의 값을 변경시킬 수 있어야한다.   
-2. logic은 presentation에게 데이터 제공 및 동기화할 수 있어야한다. 그리고 제공받은 데이터를 presentation에서 set할 수 있어야한다.
+## Data Binding의 기능
+1. presentation에서 command(이벤트)를 수행시킬 수 있고 logic의 값을 변경시킬 수 있다.
+2. logic은 presentation에게 데이터 제공 및 동기화할 수 있다. 
 
 
 
 ### Unity 환경에서 view와 logic은 어떻게 연결되는가?
-view에서 데이터가 변경될경우 logic은 해당 변경사항을 적용시킬 수 있어야됨, view에서 어떠한 이벤트가 발생했을때 logic에서 이를 처리할 수 있어야함   
-logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될때 view를 동기화시킬 수 있어야함     
--> view의 데이터 변경 명령을 어떻게 logic 측에 알릴 것인가?   
--> view의 오브젝트와 logic의 변수를 어떻게 바인딩할 것인가?  
+code에서는 UI 오브젝트의 참조를 찾아서 변수에 링킹하는 방법외에는 UI 컨트롤이 불가능하다. 따라서 code가 아닌 hierachy에서 data binding을 가능케 해야한다.
+
+위의 라이브러리 개발자는 hierachy에서 data path를 설정하고 해당 경로에 저장된 노드 값을 가져와서 view가 data source를 사용하도록 만들었다.
+
+이때 가져올 data source의 예시를 들면 이벤트(메소드), 텍스트값(스트링 값), 프로퍼티 등이 있다. 
+
+view에서 데이터가 변경될경우 logic은 해당 변경사항을 적용시킬 수 있어야된다. -> 그럼 어떻게 적용할 것인가?
+
+view에서 어떠한 이벤트가 발생했을때 logic에서 이를 처리할 수 있어야함   -> view에서 실행시킬 이벤트를 data binding으로 설정하고 이벤트가 발생되도록 해야한다.
+logic은 view에게 데이터를 제공하고 logic에서 데이터가 변경될때 view를 동기화시킬 수 있어야함     -> 반대로도 변경이 발생했을때 동기화가 가능해야한다.
+
 
 
 ## Data Binding의 프레임 워크
