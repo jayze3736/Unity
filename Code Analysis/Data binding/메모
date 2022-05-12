@@ -3,3 +3,64 @@ https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Sla
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Presentation/DataBindRunner.cs
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Presentation/DataBindingOperator.cs
 https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Presentation/DataContextNodeConnectorInitializer.cs
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Presentation/IContextOperator.cs
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Data/IDataProvider.cs
+https://bitbucket.org/coeing/data-bind/src/main/Source/DataBind.Unity/Assets/Slash.Unity.DataBind/Scripts/Core/Presentation/DataBinding.cs
+
+
+리스너와 이벤트는 따로
+예를 들어, 인벤토리 오픈 이벤트를 처리할때
+리스너인 public event InventoryOpenDelegate InventoryOpen; 와
+이벤트 OnInventoryOpen(); 선언
+
+리스너는 외부에서 이벤트를 가입시킴
+InventoryOpen += someEvent1();
+InventoryOpen += someEvent2();
+...
+그리고 이벤트 내부에 리스너에 가입되어있던 이벤트 전부 실행
+
+OnInventoryOpen(){
+var handler = InventoryOpen;
+if(handler != null)
+{
+handler();
+}
+
+}
+
+
+
+DataProvider 클래스
+: IDataProvider, DataBindingOperator
+
+추상 클래스이자, 값변경 이벤트가 정의되어있음 
+
+------
+IDataProvider 인터페이스
+
+값 변경 델리게이트가 정의되어있음
+
+
+------
+DataBindingOperator 클래스
+: MonoBehaviour, IContextOperator
+
+RegisteredDataBinding 클래스가 내부에 정의되어있음
+RegisteredDataBinding 클래스:
+Callback, DataBinding이라는 멤버 변수가 존재함,
+Callback은 콜백 리스너를 의미하고 DataBinding은 DataBinding 클래스 객체에 해당
+
+RegisterBinding( )함수는 바인딩을 초기화함 - Databinding.Init(...);
+
+
+------
+Databinding 클래스
+: IDataProvider
+
+Init() 함수로 실제 바인딩을 초기화함
+Init(DataContextNodeConnectorInitializer dataContextNodeConnectorInitializer, MonoBehaviour monoBehaviour)
+
+-> DataBindingType에 따라서 처리한다.
+-> DataBidningType은 Context, Provider, Constant, Reference 총 네가지 타입이 존재한다.
+-> Provider를 제외한 나머지 타입에 따른 처리방식이 OnTargetValueChanged(object newValue)에 데이터를 넣는다는 것이다.
+-> OnTargetValueChanged는 새로운 값을 DataBinding의 필드인 value에 대입하고 값 변경 이벤트를 발생시킨다.
