@@ -1,0 +1,109 @@
+- What is Code Stripping?
+
+- 어셈블리
+
+IPointerClickHandler 인터페이스에는 어떠한 이벤트 핸들러도 없고 단순히 OnPointerClick 추상 메소드만 존재하는데
+인터페이스를 상속받아 정의하면 클릭했을때 해당함수가 실행될 수 있는 걸까?
+
+
+- Functor란?
+
+- 디자인 패턴: 디커플링
+
+- Event System
+이벤트 시스템이 하는 일
+Manage which GameObject is considered selected 1> 현재 선택된 오브젝트를 관리하기
+Manage which Input Module is in use 2> 현재 사용중인 Input Module 관리하기
+Manage Raycasting (if required) 3> Raycast 관리하기
+Updating all Input Modules as required 4> Input Module 업데이트하기
+
+- Input Module
+Touch, Joystick, Keyboard 처럼 입력기기의 종류를 의미한다. 주의해야할 점은 XBOX, PC, PS4 처럼 플랫폼들을 Input Module로 취급하는 것이 아닌
+입력 하드웨어 장치를 Input Module의 대상으로 취급한다.
+InputModule을 관리해야하는 이유는 당연하지만 게임을 조작할때 사용가능한 입력 하드웨어 기기 선택지를 늘리기 위함이다.
+
+- Messaging System
+Event System은 이 Messaging System을 사용하는데, 이는 Input Module에서 지원가능한 인터페이스 메소드를 정의하도록 구현되어있다.
+Eventsystem 인터페이스를 상속받는 특정 인터페이스를 코더가 모노를 상속받는 클래스에서 해당 인터페이스를 구현하도록 하여 Input Module의 입력에 의한
+이벤트 함수를 호출하도록 한다.
+
+- Unity에서 사용하는 Messaging system
+https://medium.com/geekculture/how-to-use-events-to-implement-a-messaging-system-in-unity-c-342ab4806d53
+
+여기서 말하는 Messaging System은 Custom Messaging System이고 요약하자면 static 인스턴스를 사용하여 <string, UnityAction> dict을 정의하고 외부에서 이벤트를 가입시키고
+string value로 접근하여 이벤트 함수를 Emitter에서 정의한 입력 시기에 호출하도록 하는 것을 설명하고 있다.
+디자인 패턴인거같기도하고
+
+
+
+#region 어셈블리 UnityEngine.UI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+// D:\unity\project\GameTest\Library\ScriptAssemblies\UnityEngine.UI.dll
+// Decompiled with ICSharpCode.Decompiler 7.1.0.6543
+#endregion
+
+namespace UnityEngine.EventSystems
+{
+    public interface IPointerClickHandler : IEventSystemHandler
+    {
+        void OnPointerClick(PointerEventData eventData);
+    }
+}
+#if false // 디컴파일 로그
+캐시의 '224'개 항목
+------------------
+확인: 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+단일 어셈블리를 찾았습니다. 'mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll'
+------------------
+확인: 'UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.CoreModule.dll'
+------------------
+확인: 'UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.UIModule.dll'
+------------------
+확인: 'UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.TextRenderingModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.TextRenderingModule.dll'
+------------------
+확인: 'System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+단일 어셈블리를 찾았습니다. 'System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.Core.dll'
+------------------
+확인: 'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+단일 어셈블리를 찾았습니다. 'System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\System.dll'
+------------------
+확인: 'UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.PhysicsModule.dll'
+------------------
+확인: 'UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.Physics2DModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.Physics2DModule.dll'
+------------------
+확인: 'UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.IMGUIModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.IMGUIModule.dll'
+------------------
+확인: 'UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.AnimationModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.AnimationModule.dll'
+------------------
+확인: 'UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.InputLegacyModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.InputLegacyModule.dll'
+------------------
+확인: 'UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEditor.CoreModule.dll'
+------------------
+확인: 'UnityEngine.TilemapModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.TilemapModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.TilemapModule.dll'
+------------------
+확인: 'UnityEngine.SpriteShapeModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+단일 어셈블리를 찾았습니다. 'UnityEngine.SpriteShapeModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
+로드 위치: 'C:\Program Files\Unity\Hub\Editor\2020.3.29f1\Editor\Data\Managed\UnityEngine\UnityEngine.SpriteShapeModule.dll'
+#endif
