@@ -1,7 +1,8 @@
 - What is Code Stripping?
-
+TIL에 정리 해놓음
 
 - 어셈블리
+TIL에 
 
 IPointerClickHandler 인터페이스에는 어떠한 이벤트 핸들러도 없고 단순히 OnPointerClick 추상 메소드만 존재하는데
 인터페이스를 상속받아 정의하면 클릭했을때 해당함수가 실행될 수 있는 걸까?
