@@ -1,11 +1,17 @@
 1. 3단계 포인팅이 아니라, 딕셔너리로 선언하여 관리하는 방법은 어떨까
-3. 동적으로 Animatior 설정방법
+3. 동적으로 Animator 설정방법
 https://docs.unity3d.com/kr/530/ScriptReference/Animations.AnimatorController.html
+
 4. Button에 아무런 action이 대입되지않은 상태에서 invoke를 하면 오류발생?
 
-9. Button Blink 아예 애니메이션이 아예 안보임
+
+
 7. curpage null, curparagraph null 대응
 2. paragraph는 같은 레벨의 children으로 구성되는데, 같은 레벨로 구성되지않아야할 아이템들이 존재할 경우를 방지하기위한 parent 설정
+
+
+9. Button Blink 아예 애니메이션이 아예 안보임 -> 이거 문제가, Color c = img.color로 객체 참조가 될줄알았는데, img.color = (Color 타입 변수)로 대입을 시켜야만 변경사항이 적
+용됨
 
 6. text 건들이고 버튼 누르면 text guidestate 안사라짐 -> 이거 8번문제랑 연계되는 건데, 8번 문제 고치면 해결될듯
 
