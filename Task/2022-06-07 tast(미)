@@ -49,3 +49,12 @@ p3 = {text 4}
 p2의 parent: p1, chlid: null
 p1의 parent: null, child: p1 -> p2
 p3의 parent: p1, child: 
+
+5. 
+
+1). Paragraph.cs
+236번째 줄: nextParagraphRefDict.Add(curitem, nextparagraph); -> curitem이 명시적으로 null이 아니란 보장이 없음(나는 알지만 외부에선 모를 수 있음)
+GetNextParagraph(Transform item, List<Paragraph> paragraphs, bool enableDFS) -> item의 type이 명시적으로 IHelperPointable 컴포넌트가 존재하는지 명시적으로
+작성을 어떻게 할 수 있을까
+
+2). GetNextParagraph, GetPrevParagraph -> paragraph 클래스로 이동
