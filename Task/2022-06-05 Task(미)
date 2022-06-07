@@ -1,7 +1,0 @@
-1. 
-(1) parent = button, child = text일때 curparagraph item이 button인 상태에서 enter를 누르면 text로 헬퍼가 이동해야하고
-(2) text에 대한 마우스 또는 키보드 입력시 SetGuide 활성화되어야함
-(3) text로 이동했을때 button은 클릭되면 안되고 오로지 text만 상호작용할 수 있어야함
-
-2. 
-Button의 SetGuide를 활성화할때, Transition 그리고 Animation을 모두 대응할 수 있도록 인터페이스 구성
