@@ -1,0 +1,77 @@
+Paragraph GetNextParagraph(input)
+{
+
+Transform [] children = input.GetChildren();	//1레벨 다운된 child를 모두 검색
+IHelperPointable [] items;	//paragraph로 추가하기위한 아이템들 
+for(child in chlidren)
+	if(child.getComponent<IHelperPointable>() != null)
+		items.add(child)	//인터페이스를 상속받는 아이템은 items 바구니에 넣어놓음
+	else
+		//Dummy = child.AddComponent<Dummy>(); - 사실 필요없음, IHelperPointable이 아니면 전부 Dummy라서 이분법으로 구별가능
+		item = BFS(child);	//BFS로 인터페이스를 상속받는 아이템을 탐색, 이때 BFS로 반환받는 값으로 item의 parent를 받으면
+		// 다음 FindSibliingPointableItems에서 목표 반환값을 받기 수월해질 듯
+		if(item != null)	//찾았을 경우
+			IHelperPointable [] sibilingitems = FindSibilingPointableItems(item)	 //자신과 동일한 레벨이고 인터페이스를 상속 받는 child 반환
+			items.add(item) 
+			items.add(sibilingitems) //병합
+
+
+}
+
+(1) 재귀호출 이용
+IHelperPointable BFS(Transform item)
+{
+
+<<<<<<<<<< 알고리즘 >>>>>>>>>>>
+Transform [] children = item.getallchild();
+
+if(children.Count == 0) //child가 없음을 의미한다.
+{
+return null;
+}
+
+foreach(item in children){
+if(item.getcomponent<IHelperPointable>() != null)
+return item.getcomponent<IHelperPointable>();
+
+}
+
+foreach(item in children){
+BFS(item);
+}
+
+}
+<<<<<<<<<< 알고리즘 >>>>>>>>>>>
+}
+
+(2) 기존 BFS와 동일한 알고리즘인 Queue 이용
+IHelperPointable BFS(Transform item)
+{
+
+<<<<<<<<<< 알고리즘 >>>>>>>>>>>
+Queue queue = new Queue<Transform>();
+queue.enqueue(item)
+
+
+while(!queue.IsEmpty)
+//// func()
+{
+Transform temp = queue.dequeue()
+for(int i = 0; i < temp.childcount ; i++){
+
+child = temp.Getchild(i);
+queue.enqueue(child);
+if(children.getComponent<IHelperPointable>() != null)
+	return children.getComponent<IHelperPointable>();
+
+}
+////
+
+
+return null;
+
+}
+
+<<<<<<<<<< 알고리즘 >>>>>>>>>>>
+}
+
