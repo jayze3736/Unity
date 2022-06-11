@@ -6,6 +6,7 @@
 
 
 
+
 GetNextParagraph에서 캐시를 사용한다면 매번 함수호출을 통해서 파라그래프를 반환하지않아도 되므로 속도측면에서 향상되지만
 Map을 사용해야하므로 공간적인 측면에서 비용을 감수해야한다.
 
@@ -40,11 +41,11 @@ Cache -> Map을 이용, Paragraph마다 존재 -> int 변수 30개랑 int [30] �
 - BFS 구현: BFS는 왜 재귀로 구현이 불가능할까?, BFS는 너비우선탐색이며 시작 노드에서 child 노드들을 queue에 집어넣고
 queue에서 하나를 dequeue해서 뽑은 노드에 방문 기록을 표시하고 그 노드의 child노드들을 다시 enqueue한다. 노드 조회시 dequeue하는 과정에서 조건 검사가
 가능하다. (구조는 완성)
-- DummyProperty 구현: 
+- DummyProperty 구현(-):
 DummyProperty의 용도및 특징
 (1) 없는 걸로 결정됨, IHelperPointable이 아닌 오브젝트는 모두 Dummy라서 클래스 추가없이도 Dummy 구별이 가능함
 
-- Traverse(): Dummy를 루트로 IHelperPointable 아이템을 검색하는데 사용되는 함수
+
 
 - map과 dictionary
 map과 dictionary 모두 공통적으로 key와 value값을 가진다. key와 value값으로 매핑시킨다는점은 동일하나,
