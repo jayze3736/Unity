@@ -1,0 +1,5 @@
+inspector에서 설정한 Color tint 값이
+바뀌지않는 현상 -> ColorBlock cb = button.colors로 받고 cb를 수정했으면 다시 button.colors = cb 문장을 써줘야함
+
+text의 경우 click을 할때 왼쪽 버튼, 오른쪽 버튼, 가운데 마우스휠 모두 클릭시 Onpointerclick이 호출되는데
+개발자가 클릭하는 버튼의 종류에 따라서 처리를 하게하려면 어떻게 해야할까
