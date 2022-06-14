@@ -1,6 +1,6 @@
-1. test 작업 마치기, 코드 다듬기(필요없는 변수, 함수 제거 및 필요한 기능 생각해보고 추가), paragraphs 제거(완)
+1. test 작업 마치기(완), 코드 다듬기(필요없는 변수, 함수 제거 및 필요한 기능 생각해보고 추가), paragraphs 제거(완)
 2. runtime 중에 아이템의 parent가 바뀌는 경우
-3. Save file UI 적용
+3. Save file UI 적용(완)
 4. Book의 List<PageableUI>를 LinkedList로 바꿈(완) -> 특정위치의 node를 맨앞으로 가져올때 Firstnode를 clickednode위치로 변경하려면 clickednode.prev.next를 Firstnode로 참조시켜
 야한다. 그러나, LinkedList는 오로지 head로부터 출발하여 한 방향으로만 접근이 가능하기때문에 prev를 사용할 수 없고 iteration을 여러번해야 clickednode.prev.next을 찾을 수 있다.
 node의 개수가 유동적이고 node의 개수가 많고 위치 변경이 잦을경우 iteration 시도가 많아지므로 시간 비용을 많이 소모해야한다. 
