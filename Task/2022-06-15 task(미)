@@ -5,3 +5,5 @@
 2. Page를 여러개 생성하고 DoublyLinkedList가 정상적으로 작동하는지 확인
 
 3. paragraph 대신에 UIHelper 동작을 Tree 구조로 할 수 있을까
+
+4. image raycast target 과 button.interactable의 차이는?
