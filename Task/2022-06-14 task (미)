@@ -3,3 +3,38 @@ inspector에서 설정한 Color tint 값이
 
 text의 경우 click을 할때 왼쪽 버튼, 오른쪽 버튼, 가운데 마우스휠 모두 클릭시 Onpointerclick이 호출되는데
 개발자가 클릭하는 버튼의 종류에 따라서 처리를 하게하려면 어떻게 해야할까
+
+-> State의 상태를 표현하기에 적절한 Enum을 사용했고, Enum에서 [Flags]를 추가하면 비트 플래그로 enum 요소 값을 표현할 수 있고 이 비트 플래그를 조합하는 것이 가능해져
+2개 이상의 state를 선택할 수 있다. 개발자는 복수의 선택을 포함하여 State를 골라서 비트 마스크로 사용하면 왼쪽 버튼, 오른쪽 버튼, 가운데 버튼을 선택한 state 조합에 따라
+검출하는 것이 가능해진다.
+
+``` c#
+외부:
+public override InputButtonFlags Inputbuttonflags { get => InputButtonFlags.Left | InputButtonFlags.Right; } //복수의 state 선택 가능
+
+처리 루틴:
+int flag;
+        if(PointerEventData.InputButton.Left == eventData.button)
+        {
+            flag = 0b_0000_0001;
+        } 
+        else if(PointerEventData.InputButton.Right == eventData.button)
+        {
+            flag = 0b_0000_0010;
+        }
+        else if(PointerEventData.InputButton.Middle == eventData.button)
+        {
+            flag = 0b_0000_0100;
+        }
+        else
+        {
+            flag = 0b_0000_1111;
+        }
+
+        int result = flag & (int)Inputbuttonflags;
+        if(result == flag)
+        {
+            UIhelper.helper.UIhelperMoveTo(this);
+        }
+```
+
