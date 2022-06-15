@@ -1,0 +1,3 @@
+1. Text의 OnpointerClick, Button의 Onclick등 UIhelper가 현재 참조하고있는 아이템의 paragraph안에서 클릭이 이루어져야하는데, paragraph와 별개로 클릭 이벤트를
+외부에서 정해주면 EventSystem에서는 한정된 아이템이아니라 모든 아이템들의 Event를 발생시키기때문에 이에대한 조치를 해줘야함
+
