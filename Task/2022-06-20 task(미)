@@ -1,0 +1,4 @@
+1. canvas에 장착되어있는 GraphicRaycaster 처럼 Raycaster는 어떤 역할을 하는가
+2. StandaloneInputModule을 상속받는 커스텀 Input 모듈을 만들기 전까지는 현재 Eventsystem에서 전송중인 PointerEventData 정보에 접근할 수 없다. 즉, PointerEventData(EventSystem.
+current)로 PointerEventSystem을 생성해도 받을수가 없다.
+3. InputModule에 대해서 정확하고 자세하게 어떤 역할을 하고 어떤 기능이 정의되어있는지 정리
