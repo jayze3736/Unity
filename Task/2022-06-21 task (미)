@@ -22,3 +22,6 @@ headparagraph.OpenParagraph();
 curparagraph = headparagraph;
 대로 PageReset()을 호출한다.
 
+3. UIhelper는 static 객체인데, 만약 어떤 입력으로 인해 helper의 객체값을 여러 스크립트에서 동시에 접근하여 수정할 필요가 있는 경우 이런 경우를 조심하자. 
+프로그래머 입장에서는 놓치기 쉽고 프로그램이 계획한 흐름으로 실행되지않을 수 있어서 주의해야한다.
+
