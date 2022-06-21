@@ -13,3 +13,12 @@
 curparagraph.OnNonSelectable()
 headparagraph.OnSelectable()
 headparagraph = curpargraph
+
+-> 해결:
+만약 페이지를 이동할때 지금 보고있던 페이지의 기록을 남길 필요가 있으면 그냥 놔두고(해당 기록을 Page 객체에서가지고있으니까) 만약 초기화를해야한다면 
+curparagraph.CloseParagraph();
+curparagraph.ClearGuideState(true);
+headparagraph.OpenParagraph();
+curparagraph = headparagraph;
+대로 PageReset()을 호출한다.
+
