@@ -4,6 +4,7 @@
 -> 문제점: OnNonSelectable과 OnSelectable이 다음 파라그래프 이동시 이루어질때, 이전 파라그래프에 OnNonSelectable 설정이 되어있는상태에서
 다른 페이지로 옮겨지면 해당 설정을 해제해줘야함 -> 다시 말해서 모든 세팅을 초기화해야함
 -> headpargraph는 OnSelectable이 되야되고, 나머지는 전부 OnNonSelectable로
+-> 해결: 아마 이거 기억하길, headparagraph를 잘못설정해서 그랬던거같은데(pageInit)
 
 이렇게 합시다.
 페이지를 이동할때 현재 paragraph 포인터를 초기화할지 아니면 그대로 남길지 설정을 할 수 있도록 만들고
