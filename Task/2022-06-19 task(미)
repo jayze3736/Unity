@@ -8,7 +8,8 @@ jekyll 뭔가 모르겠으면 홈페이지에서 F12누르고 개발자옵션으
 -1. vscode 로컬 저장소 삭제
 -2. vscode home 디렉토리 변경
 -3. vscode gittest 리포지토리 clone해보기
-3. unity c# reference code(미)
+3. unity c# reference code(-) -> 이거 해봤는데 내가 원하는 코드가 없음, 원래는 BaseInputModule을 보려고했는데 이게 배포하는 프로젝트에는 없고 말 그대로
+유니티 엔진, 에디터 소스가 있음
 
 
 github-pages 226 | Error:  Could not locate the included file 'icon-github.html' in any of
