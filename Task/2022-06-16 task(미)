@@ -1,3 +1,0 @@
-1. Book 클래스에 구현한 viewClickedPage를 이용하여 현재 페이지를 클릭한 페이지로 참조할 수 있도록 해야한다.
-(1) 현재 감 잡히는 방법은 PageableUI가 Canvas를 가지고 있으니까, raycast 대상을 Canvas로 하는방법
-(2) 어떤 물체를 클릭하면 해당 오브젝트의 최상위 오브젝트인 PageableUI를 가져와서 해당 페이지로 참조시키는 방법
