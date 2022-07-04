@@ -1,4 +1,4 @@
-1. Pointable 오브젝트에 save 기능연결해서 Save text를 누르거나 Enter를 입력하면 Save기능이 이루어지도록
+1. Pointable 오브젝트에 save 기능연결해서 Save text를 누르거나 Enter를 입력하면 Save기능이 이루어지도록(완) - load만 하면 됨
 
 1. IHelperPointable 아이템이 만약 다른 오브젝트로 옮겨갔을때 Paragraph의 대응(-)
 -> a 파라그래프에서 b 파라그래프로 이사
