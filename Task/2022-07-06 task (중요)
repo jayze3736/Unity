@@ -1,0 +1,5 @@
+# Unity Editor의 사용법과 사용용도에 관해 생각해보기 - 특히 세이브 관점에서
+# UIBase라는 클래스가 존재하는가?
+# ScriptableObject의 기능에 대해서 정확하게 알아보기
+# https://everyday-devup.tistory.com/87 블로그에서 보았듯이 오브젝트의 reference를 저장하여 관리하는 것이 가능한가?
+# 빠르고 명확하게 세이브 데이터를 로드해서 게임오브젝트에 매핑 후 대입할 수 있는 방법이 있을까
