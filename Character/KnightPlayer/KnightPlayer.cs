@@ -74,6 +74,7 @@ public class KnightPlayer : MonoBehaviour
 
     float lastOnGroundTime;
     float attackCoolTime;
+    public readonly string SFXCategory = "Knight"; 
     KnightPlayerStat stat;
 
     private void OnDrawGizmos()
@@ -411,12 +412,13 @@ public class KnightPlayer : MonoBehaviour
         get { return Data_Stat.ATK * 1.0f; }
     }
 
-    public void DamageEnemy(Enemy enemy, float damage)
+    public void Attack(Enemy enemy, float damage)
     {
         Debug.Log("Player Gave " + damage + "dmg to" + enemy.name);
         Vector2 force = Data_Stat.KnockBackPower * (Mathf.Sign(enemy.transform.position.x - transform.position.x)) * Vector2.right;
         Debug.Log("Force:" + force);
         enemy.GiveDamage(damage, force);
+        
 
     }
 

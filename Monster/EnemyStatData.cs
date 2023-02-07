@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Data", menuName = "EnemyData/EnemyStatData", order = 1)]
 public class EnemyStatData : ScriptableObject
 {
-    public float HP { get { return hp; } }
+    public float MAXHP { get { return hp; } }
     public float Damage { 
         get { if(damage < 0) return 0; else return damage;} }
     public float Mass { get { return (mass == 0) ? 1 : mass;  } }

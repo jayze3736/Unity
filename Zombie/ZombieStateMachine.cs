@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class ZombieStateMachine
 {
-
     IEnemyState curState;
+    
 
 
-    public void Start()
+    public void Start(Enemy zombie)
     {
         curState = new ZombieIdleState();
+        curState.Enter(zombie);
 
     }
 
@@ -18,7 +19,7 @@ public class ZombieStateMachine
     public void Update(Enemy zombie)
     {
         
-        if (zombie.isDead())
+        if (zombie.isDead()) // global state(any state)
         {
             curState = new ZombieDeathState();
             curState.Update(zombie);
@@ -26,7 +27,14 @@ public class ZombieStateMachine
         else
         {
             curState.Update(zombie);
-            curState = curState.ChangeState(zombie);
+            var nextState = curState.ChangeState(zombie);
+
+            if(nextState != curState)
+            {
+                curState.Exit(zombie);
+                nextState.Enter(zombie);
+            }
+            curState = nextState;
         }
 
         

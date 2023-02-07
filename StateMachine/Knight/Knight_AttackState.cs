@@ -58,13 +58,19 @@ public class Knight_AttackState : IKnightState
     void DamageEnemy(KnightPlayer knight)
     {
         var enemies = knight.DetectEnemyInAttackRange();
+        jsh.SoundManager.instance.PlaySFX(knight.SFXCategory, "SwordSlash");
 
-        if (enemies == null) return;
+        if (enemies == null)
+        {
+            return;
+        }
 
         foreach (var enemy in enemies)
         {
-            knight.DamageEnemy(enemy, knight.Attack1Damage);
+            knight.Attack(enemy, knight.Attack1Damage);
         }
+
+        
 
     }
 }

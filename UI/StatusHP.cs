@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StatusHP : MonoBehaviour
 {
+    // Å×½ºÆ®
+
     float MaxHP;
     KnightPlayer player;
 

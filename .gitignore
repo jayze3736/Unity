@@ -1,2 +1,4 @@
-*
-!*.cs
+*.meta
+.gitignore
+*.prefab
+*.png

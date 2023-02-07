@@ -40,29 +40,46 @@ public class Zombie : Enemy
     /// </summary>
     float knockBackTimer;
 
+    
+    float soundIdleTimer;
+
+    [Header("SFX")]
+    [SerializeField]
+    float walk_minSoundDelay;
+
+    [SerializeField]
+    float walk_maxSoundDelay;
+
+    [SerializeField]
+    float damaged_soundPitch;
 
     bool isStunning = false;
     ZombieStateMachine stateMachine;
-    
+
 
 
     #endregion
 
     #region Mono
+
+    private void Awake()
+    {
+        Init();
+        stateMachine = new ZombieStateMachine();
+        stateMachine.Start(this);
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
   
-        Init();
-
         ResetAttackCoolTimer(); // 기본초기화
         ResetKnockBackTimer(); // 기본 초기화
 
         if (rb == null)
             rb = this.transform.GetComponent<Rigidbody2D>();
 
-        stateMachine = new ZombieStateMachine();
-        stateMachine.Start();
         
 
     }
@@ -269,12 +286,25 @@ public class Zombie : Enemy
         {
             RunNormal();
         }
+
+        #region Play SFX
+        if (soundIdleTimer <= 0)
+        {
+            jsh.SoundManager.instance.PlaySFX("Zombie", "ZombieWalk");
+            soundIdleTimer = Random.Range(walk_minSoundDelay, walk_maxSoundDelay);
+        }
+        else 
+        { 
+            soundIdleTimer -= Time.deltaTime; 
         
+        }
+        #endregion
+
 
 
     }
 
-  
+
     public override bool IsPlayerNear()
     {
         return (GetPlayerNearOnXaxis() != null);
@@ -293,6 +323,7 @@ public class Zombie : Enemy
 
         if (!isDead())
         {
+            jsh.SoundManager.instance.PlaySFX("Zombie", "ZombieWalk", damaged_soundPitch);
             Debug.Log("Left Zombie life:" + STAT.HP);
             Debug.Log("damaged");
 

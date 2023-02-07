@@ -14,7 +14,6 @@ public class ZombieAttackState : IEnemyState
         }
         else
         {
-            Exit(enemy);
             return new ZombieIdleState();
         }
 
