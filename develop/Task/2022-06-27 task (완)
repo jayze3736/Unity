@@ -1,0 +1,32 @@
+1. Pointable 오브젝트에 save 기능연결해서 Save text를 누르거나 Enter를 입력하면 Save기능이 이루어지도록(완) - load만 하면 됨
+
+1. IHelperPointable 아이템이 만약 다른 오브젝트로 옮겨갔을때 Paragraph의 대응(-)
+-> a 파라그래프에서 b 파라그래프로 이사
+-> 관리를 할 수 있는건 page밖에 없는 것같은데
+-> gameobject의 parent 또는 child로 이동 -> 특정 gameobject가 존재, 그놈의 child 또는 parent로 설정
+->  이사 불가능
+-> 보통 UI내부 오브젝트가 hierachy 내에서 자주 이동이 되지않는것 같고 이거 구현하려면 생각을 많이 해야할 것같음
+->  일단 보류
+
+2. 오브젝트가 inactive할때 대응(완)
+오브젝트가 active일때는
+-> setguide , setdefault 가능 OpenParagraph 또는 CloseParagraph 사용가능
+오브젝트가 inactive일때는
+-> setguide , setdefault 불가  또한 선택 불가능 OpenParagraph 또는 CloseParagraph 사용가능
+
+결론적으로, itemlist의 pointer를 옮겼는데 해당 오브젝트가 inactive할경우 pointer를 다음으로 넘겨서 현재 선택중인 아이템을 다르게 하자, 그리고 외부에서 
+inactive -> active가 되면 이제는 선택이 가능하여 setguide, setdefault를 사용가능하게 만들자.
+
+3. SetGuide 효과는 안쓰고 RaiseEvent만 쓸경우(-)
+-> Guide, Default 없이 단지 inactive - active 설정을 OpenParagraph와 CloseParagraph에 정의하려고 하는 오브젝트
+-> 이건 의미가 맞지않음, 왜냐하면 오브젝트를 inactive로 바꾸는건 paragraph를 바꾼다는
+의미가 아니라 단순히 active 여부만 바꾸는것이기때문에 의미가 맞지않음
+-> 결론적으로 setguide를 사용하지않고 inactive 변경만 하는 UI 오브젝트의 경우에는 로직을 IHelperPointable을 상속받는 클래스에 정의하기보다는
+따로 클래스를 작성하는게 맞지않나
+
+pointer = 3, count = 7
+i = 1 ~ 6
+a b c d e f g  a b c d 
+0 1 2 3 4 5 6 7 8 9 10
+        p              
+

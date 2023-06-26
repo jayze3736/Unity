@@ -1,0 +1,28 @@
+1. null과 쓰레기값의 차이?
+2.
+타 페이지를 이동할때 처음 클릭한 아이템이 아닌 다른 아이템을 클릭하면 클릭이 안되는 현상(완)
+-> 문제점: OnNonSelectable과 OnSelectable이 다음 파라그래프 이동시 이루어질때, 이전 파라그래프에 OnNonSelectable 설정이 되어있는상태에서
+다른 페이지로 옮겨지면 해당 설정을 해제해줘야함 -> 다시 말해서 모든 세팅을 초기화해야함
+-> headpargraph는 OnSelectable이 되야되고, 나머지는 전부 OnNonSelectable로
+-> 해결: 아마 이거 기억하길, headparagraph를 잘못설정해서 그랬던거같은데(pageInit)
+
+이렇게 합시다.
+페이지를 이동할때 현재 paragraph 포인터를 초기화할지 아니면 그대로 남길지 설정을 할 수 있도록 만들고
+두가지 기능 구현
+
+-
+curparagraph.OnNonSelectable()
+headparagraph.OnSelectable()
+headparagraph = curpargraph
+
+-> 해결:
+만약 페이지를 이동할때 지금 보고있던 페이지의 기록을 남길 필요가 있으면 그냥 놔두고(해당 기록을 Page 객체에서가지고있으니까) 만약 초기화를해야한다면 
+curparagraph.CloseParagraph();
+curparagraph.ClearGuideState(true);
+headparagraph.OpenParagraph();
+curparagraph = headparagraph;
+대로 PageReset()을 호출한다.
+
+3. UIhelper는 static 객체인데, 만약 어떤 입력으로 인해 helper의 객체값을 여러 스크립트에서 동시에 접근하여 수정할 필요가 있는 경우 이런 경우를 조심하자. 
+프로그래머 입장에서는 놓치기 쉽고 프로그램이 계획한 흐름으로 실행되지않을 수 있어서 주의해야한다.
+

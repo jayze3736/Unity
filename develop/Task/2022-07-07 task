@@ -1,0 +1,43 @@
+1. JSON 파일로 저장되는지 확인, 그리고 되도록 만들기 - binary formatter 사용 금지
+2. Dict<string, object> 타입의 변수를 만들고 key값으로는 자신의 클래스명이 되도록, 그리고 만약 namespace 안에서 클래스가 정의되어있을 경우에는
+(네임스페이스 이름).(클래스 명) 형태로 key값을 저장
+
+# 클래스 이름 가져오기: https://stackoverflow.com/questions/2113069/c-sharp-getting-its-own-class-name
+GetType.Name()
+# namespace 이름 가져오기: https://stackoverflow.com/questions/18485469/how-can-i-retrieve-the-namespace-to-a-string-c-sharp
+GetType.Namespace
+# Type 클래스: https://docs.microsoft.com/ko-kr/dotnet/api/system.type?view=net-6.0
+
+
+- 모든 것을 담을 수 있는 object 데이터는 JSon 변환이 불가능하다.
+- 크게 SaveData의 정의, Save(), Load() 구현을 주제로 볼 수 있다.
+
+1) SaveData의 정의
+- 기존의 방식: 사용할 필드를 SaveData 클래스에 미리 정의 -> 단점: SaveData 클래스의 필드가 추가가 되면 다른 Save()함수와 Load()함수 또한 바꿔야한다.
+- 대안 1: 런타임에 새로운 클래스 SaveData를 만들고 필요한 객체를 필드로 정의한다.(즉, 런타임중에 클래스와 그의 필드를 정의한다.)
+- 대안 2: object 변수에 무차별적으로 데이터를 담는 방법
+
+2) Save() 메소드
+- 기존의 방식: Static 변수의 경우 참조값을 가져오고, non static 변수는 값을 생성하여 SaveData의 필드값을 수정하고 직렬화 한다.
+-> 단점: SaveData의 필드가 변경되면 Save() 메소드도 바꿔야한다.
+
+- 대안 1: 먼저 SaveData에 집어넣어야할 객체의 클래스는 프로젝트 빌드와 동시에 SaveData의 event handler에 가입한다. 가입과 동시에 자신의 객체정보를
+복사하여 런타임중에 SaveData 클래스에 필드로 추가한다. Save()함수 호출시에 각 가입되어있는 객체들의 데이터를 런타임중에 생성된 필드에 대입하고 직렬화한다.
+(약간 이벤트 핸들러에서 가입된 객체들을 모아서 새로운 클래스로 만든 후에 그 클래스 객체들의 참조값(주소값)을 주시하고있다가 필요한 순간에 직렬화하는 방식?)
+
+-> 장점: SaveData의 정의와 Save()함수의 코드 일관성을 유지할 수 있다.
+
+3) Load() 메소드
+- 기존의 방식: SaveName에 맞는 파일을 불러와 SaveData 객체를 다시 재생성하고 이 데이터의 값을 사용해야할 객체에 전달한다. -> SaveData가 바뀌면 Load()
+또한 바뀌어야한다.
+
+- 대안 1: Save Name에 맞는 파일을 불러와 SaveData 객체를 불러온다. 각 이벤트 핸들러에 가입된 클래스는 SaveData의
+
+3. Static Type, Dynamic Type
+https://artist-developer.tistory.com/6
+
+4. Create Class in Runtime
+https://stackoverflow.com/questions/646258/how-can-i-dynamically-add-a-field-to-a-class-in-c-sharp
+
+5. dynamic 키워드
+https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/using-type-dynamic

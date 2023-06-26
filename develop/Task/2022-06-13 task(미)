@@ -1,0 +1,63 @@
+Github 
+- header를 이용한 링크 사용법 숙지(완)
+- TIL 목차 만들기, TIL 정리
+- Task 정리
+- module
+- 레포지토리의 사용하지않는 파일들을 옮길 예정인데, 하나하나 다 수정하는 것이 불가능 -> Git bash를 배우면 사용가능하다는데 본격적으로 git을 배워야하나?
+- Git Bash
+
+- 자료구조
+Array List
+Linked List()
+Doubly Linked List()
+Stack()
+Hash table()
+Queue()
+Graph
+Tree
+
+// 사이트 //
+- MP4 to GIF:
+- 페이지 링크: https://replaykim.tistory.com/5
+- 모범 TIL 정리: https://github.com/cheese10yun/TIL
+
+
+- c#
+Delegate
+Event
+Readonly
+static 클래스
+virtual, abstract, override
+yield, coroutine
+Getter, Setter
+
+
+- Unity Tricks
+2022-02-08(get inactive obj).md
+2022-02-18(Sceneloaed 이벤트).md
+2022-02-23(SceneLoaded).md
+생명주기
+TMP
+Mesh, MeshRenderer
+코드 스트리핑
+스크립팅 백엔드
+
+
+- Plastic Scm
+
+- git
+
+- 코딩 스트레이지
+2022-02-22(절차-객체지향).md
+변수의 초기화 시점
+
+- etc
+가상 머신
+IL
+
+- 디자인 패턴
+MVVM
+data binding
+
+
+

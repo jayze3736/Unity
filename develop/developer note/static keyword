@@ -1,0 +1,15 @@
+1. static 변수, 함수 그리고 클래스는 어떤 의미를 갖는가
+2. singleton의 static 변수의 멤버 변수를 new 키워드로 동적할당을 하는 것과 안하는 것의 차이는?
+
+1의 답)
+1. static instance는 모든 클래스 인스턴스에서 공유되는 멤버이다.
+2. static method는 static instace의 변경을 위해 선언하는데, 기본적으로 static, non static 필드에 모두 접근이 가능하며
+non static method의 경우 class name을 앞에 붙여서 static 필드에 접근하는 반면,
+static method는 class name 없이 static 필드에 접근할 수 있다.
+3. static class는 static 멤버 함수, 필드만 생성할 수 있으며 다른 클래스에서 static으로 선언한 클래스를 상속할 수 없음을 선언한다.
+
+참조: https://www.geeksforgeeks.org/static-keyword-in-c-sharp/
+
+2의 답)
+결론적으로는 아무런 차이가 없다. 다만, singleton 객체의 멤버가 초기화되지않았을때는 동적할당한 것처럼 사용가능하지만 (원리에 대해선 자세히는 모름)
+직접 null로 초기화가 되면 사용이 불가능하다.

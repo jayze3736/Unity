@@ -1,0 +1,73 @@
+1. 입력에 딜레이 주기
+어떤 메소드를 호출시킬 조건이 여러개의 사용자 입력일 경우 또는 중복 입력을 하는 경우(즉, 한프레임에 동시에 두번눌리는 현상)를 막는 방법
+-> c#의 Sync가 뭔 기능인지 조사, 다시말해서 입력이 여러개여도 한번 호출되면 함수 호출이 종료될때까지 해당 함수를 다시 호출해서는 안됨
+
+2. Button의 Transition에 대해서 button을 클릭했을때 효과를 color tint, animation 등으로 골라서 정할 수 있는데, 각 버튼마다 transition 종류가 다를 수 있어서 이에 대한 코딩을 해줘야할듯
+
+
+해결 방법)
+문제1: 더블 클릭 검출 방법
+문제2: 키보드 입력 지연 방법
+///////////////////////////////////////////////////////////////////////////문제 1/////////////////////////////////////////////////////////////////////////////////////
+- 조건
+1. 일반 클릭과 구별이 가능해야함 따라서 사용하고있는 OnPointerClick과 구별이 되어야함
+2. 딜레이를 두느냐 두지 않느냐에 따라 퍼포먼스와 코딩 스트레이지가 다르다.
+
+- 해결방안
+1. 딜레이를 둘 경우: OnPointerClick을 제거, 따로 Click과 DoubleClick을 구별하여 검출해야함
+2. 딜레이를 두지않을 경우: 해당 오브젝트를 연속으로 두번클릭하면 더블 클릭으로 구별함
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////문제 2/////////////////////////////////////////////////////////////////////////////////////
+- 조건
+1. Update문에서 사용이 가능해야한다.(frame 단위의 작업공간)
+2. 어떤 키보드 입력을 주면 딜레이 시간동안 모든 키 입력을 무시한다. 
+3. 전체시스템을 바꾸는 것이 아니라 UI가 활성화되었을때 또는 입력 지연이 필요한 구간에서 사용이 가능해야한다.
+
+- 정의
+1. 입력 지연이란, 하나의 키보드가 눌렸을때 누른 키 뿐만아니라 전체 키보드가 잠시 입력이 불가능하도록 만드는 것을 의미한다.
+
+- 탐색 범위
+1. EventSystem, Input, Keyboard 입력 관련 클래스
+
+- 해결 방안
+1. 전체적으로 키 입력을 활성화/비활성화 할 수 있는 클래스를 발견
+2. timer를 두고 특정시간동안 키보드 입력 또는 if(input)문을 접근하지 못하게하는 방법
+
+1번 방안
+InputSystem.DisableDevice(InputDevice)와 InputSystem.EnableDevice(Keyboard.current);로 현재 사용중인 키보드를 비활성화/활성화 하는것이 가능
+
+참고: https://docs.unity3d.com/Packages/com.unity.inputsystem@0.9/api/UnityEngine.InputSystem.InputDevice.html#UnityEngine_InputSystem_InputDevice_enabled
+
+2번 방안
+inputTrigger = false;
+Update(){
+
+if(!inputTrigger)
+{
+
+if(input1)
+inputTrigger = true;
+if(input2)
+inputTrigger = true;
+if(input3)
+inputTrigger = true;
+
+}
+else{
+time += delay * Time.Deltatime; //시간을 재기 시작
+
+if(time > delay) //지정된 시간보다 커짐
+{inputTrigger = false; 
+time = 0;	//초기화
+}
+
+}
+
+
+}
+
+

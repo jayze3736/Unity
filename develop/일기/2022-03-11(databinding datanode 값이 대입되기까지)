@@ -1,0 +1,72 @@
+DataNode의 value값을 정하기까지
+1. Context
+ public void SetValue(string path, object value)
+        {
+            this.dataTree.SetValue(path, value);
+        }
+
+->
+
+2. DataTree.cs
+public void SetValue(string path, object value)
+        {
+            var node = this.ResolvePath(path);
+            node.SetValue(value);
+        }
+
+->
+
+3. DataTree.cs
+private IDataNode ResolvePath(string path)
+        {
+            var node = this.root.FindDescendant(path);
+            if (node == null)
+            {
+                throw new ArgumentException("Invalid path '" + path + "' for type " + this.root.DataType, "path");
+            }
+            return node;
+        }
+
+ResolvePath는 IDataNode 반환
+
+-> 
+4. IDataNode.cs
+void SetValue(object newValue);
+->
+5. DataNode.cs 에서 인터페이스 구현
+public void SetValue(object newValue)
+        {
+            if (this.parentNode != null)
+            {
+                var parentValue = this.parentNode.Value;
+
+                // Try to cast value if not already target type.
+                if (newValue != null && newValue.GetType() != this.typeInfo.Type)
+                {
+                    object convertedValue;
+                    if (!ReflectionUtils.TryConvertValue(newValue, this.typeInfo.Type, out convertedValue))
+                    {
+                        throw new InvalidCastException(string.Format(
+                            "Can't cast new value '{0}' (Type: '{1}') to expected type '{2}'", newValue,
+                            newValue.GetType(), this.typeInfo.Type));
+                    }
+                    newValue = convertedValue;
+                }
+
+                // Update data value.
+                this.typeInfo.SetValue(parentValue, newValue);
+
+                // Update parent node if parent is a value type.
+                if (parentValue != null &&
+                    parentValue.GetType().IsValueType)
+                {
+                    this.parentNode.SetValue(parentValue);
+                }
+            }
+
+            this.SetCachedValue(newValue);
+        }
+this.typeInfo.SetValue(parentValue, newValue); 은 NodeTypeinfo의 SetValue 함수 이용
+ObjectNodeTypeInfo 에서 오버라이딩하여 재정의함. this.typeInfo.SetValue(parentValue, newValue);
+은 솔직히 뭔지 잘 모르겠음
+this.SetCachedValue(newValue);는 캐싱이며 실제 노드값을 여기서 대입하나봄

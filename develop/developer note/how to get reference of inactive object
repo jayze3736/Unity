@@ -1,0 +1,88 @@
+보통 Transform이나 GameObject 타입의 변수를 public으로 생성하면 해당 변수의 reference를 지정해야한다.
+
+prefab inspector에서 reference를 드래그 앤 드롭방식으로 지정하는 방법이 있고
+또는 직접 스크립트에서 null check를 하여 getchlid, Find와 같은 오브젝트 조사함수를 사용하여 지정하는 방법이있다.
+
+드래그 앤 드롭 방식의 경우, inactive와 active에 상관없이 지정해놓은 오브젝트의 reference를 지정할 수 있다. 하지만,
+수많은 오브젝트 중에서 눈으로 찾아서 지정해야하는 번거로움과 prefab 수정이 발생하면 reference를 잃는다는 큰 단점이 존재한다.
+
+스크립트에서 reference를 지정할 경우에는 오브젝트 조사함수를 사용해야하는데, Find는 오로지 active 한 오브젝트만 찾을 수 있다.
+UI와 같은 시각적인 요소의 경우 모든 UI element들을 active로 전환하면 작업 scene이 복잡해지기때문에 inactive로 바꾸고 작업해야한다.
+따라서 Find는 항상 reference를 찾는데 효율적인 함수가 아님을 알 수 있다.
+
+Script Component가 고유할 경우에는 GetComponent<> 또는 GetComponentinChildren<> 을 사용하면 쉽게 찾을 수 있지만, 이 함수들도 active 오브젝트에만 적용되므로
+사용하기가 불편하다.
+
+getchild의 장점은 active와 inactive에 상관없이 조사한 child의 reference를 받을 수 있다는 점이지만, 스크립트를 보유하고 있는 오브젝트의 바로 하위 children에만 접근이 가능하고
+인덱스로만 조사가 가능하다. 예를 들면 getchild(2)는 스크립트 보유 옵젝의 3번째 child를 반환한다.(0,1,2) 따라서 이름과 같은 식별자(identifier)로 조사가 불가능한 점이 큰 단점이다.
+
+getchild가 inactive와 active와 관계없이 reference를 얻을 수 점을 이용하여 함수를 작성하기로 했다. 다음과 같다.
+
+public Transform SetMenuChild(Transform root , string searchPath)
+    {
+
+        Transform result = null;
+        string[] substr = searchPath.Split('/');         //devide object path into object name and assign it
+        string nextpath = "";
+
+        
+        //Process 1: make nextpath
+        for(int i = 1; i < substr.Length; i++)
+        {
+            nextpath += substr[i];
+
+            if(!(i == (substr.Length - 1))) //add '/' to right side of object name except last object name
+                nextpath += '/';
+            
+            //nextpath has string except substr[0]
+        }
+
+        List<Transform> child = new List<Transform>();  //child saves root's children
+
+        //Process 2: save children of root
+        for(int i = 0; i < root.childCount; i++)
+        {
+            child.Add(root.GetChild(i));       //remember all child of root transform   
+        }
+
+
+        //Process 3: Checks if current process is under hierachy of target child's parent
+        if (substr[0] == searchPath)    //when this is true, substr[0] is target object
+        {
+            
+            for (int i = 0; i < child.Count; i++)   //find object that has target name
+            {
+                if (child[i].name == substr[0])
+                {
+                    
+                    return child[i];    //return target
+                }
+
+            }
+
+        }
+       
+
+        //Process 4: make recursive call from root to target's parent
+        for (int i = 0; i < child.Count; i++)
+        {
+            if (child[i].name == substr[0])
+            {
+                bool isactive = child[i].gameObject.activeSelf; //remember state is whether active or inactive
+                child[i].gameObject.SetActive(true);
+                result = SetMenuChild(child[i], nextpath);
+                child[i].gameObject.SetActive(isactive);
+            }
+
+        }
+
+        
+        return result;  // if target were not found then return null
+        
+
+
+        //ex) obj search history: A/B/C/D = Str
+        //1. string [] substr = Str.Split("/");
+        //2. getchild는 active와 상관없이 순서에따라 child를 가져올 수 있음
+    }
+

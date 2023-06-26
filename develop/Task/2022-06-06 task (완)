@@ -1,0 +1,32 @@
+1. 3단계 포인팅이 아니라, 딕셔너리로 선언하여 관리하는 방법은 어떨까(완)
+딕셔너리는 먼저 key 중복 허용이 안된다. 3단계 포인팅 대신에 딕셔너리를 사용하는 것은 불가능하다.
+일단 현재(2022-06-11) 캐시할때 딕셔너리를 사용하여 item을 key로 두고 item이 nextParagraph를 다시 참조할때 캐시된 값으로 바로 참조할 수 있도록 하였다. 
+
+
+
+3. 동적으로 Animator 설정방법
+https://docs.unity3d.com/kr/530/ScriptReference/Animations.AnimatorController.html
+
+4. Button에 아무런 action이 대입되지않은 상태에서 invoke를 하면 오류발생?(완) -> 아마 null인데 invoke하라고 시켜서 그런듯
+
+
+
+7. curpage null, curparagraph null 대응(완) -> 특히 curparagraph는 UIhelper에서 curpage가 null이면 null에서 curparagraph를 참조할 수가 없어서 예외가 발생하므로 getter를 사용하여
+처리를 해야하고, curpage같은 경우에는 Update 문에서 Curpage를 참조하는경우에 문제가 발생하니 이에대한 주의를 해야함
+
+2. paragraph는 같은 레벨의 children으로 구성되는데, 같은 레벨로 구성되지않아야할 아이템들이 존재할 경우를 방지하기위한 parent 설정(완)
+
+-> 우리가 보통 UI 아이템을 구성할때 단일 오브젝트로 구성할때도 있지만 parent와 child로 구성되어 IHelperPointable을 상속받는 오브젝트와 받지 않는 오브젝트의 꾸러미 형태로
+하나의 UI 단위 오브젝트를 만들면 같은 레벨의 아이템들을 paragraph로 구성하기가 힘듬, 따라서 그에 대한 처리를 위해서 복잡하지만 child를 대상으로 상속받는 아이템은 그대로
+paragraph에 추가하고 받지않는 오브젝트는 BFS를 실행하여 최초로 찾아지는 IHelperPointable 오브젝트를 받도록한다. 이에 대한 사진 첨부는 할거임
+
+
+9. Button Blink 아예 애니메이션이 아예 안보임(완) -> 이거 문제가, Color c = img.color로 객체 참조가 될줄알았는데, img.color = (Color 타입 변수)로 대입을 시켜야만 변경사항이 적
+용됨
+
+6. text 건들이고 버튼 누르면 text guidestate 안사라짐(완) -> 이거 8번문제랑 연계되는 건데, 8번 문제 고치면 해결될듯
+
+5. KeyPadEnter만 입력이 안먹음(완) -> Keycode.Return을 사용하면 해결됨, Return키가 enter더라고 shortcut 보면 키보드 자리에 return으로 되어있음
+
+8. button과 text 영역이 겹쳐진 부분을 클릭하면 button 클릭 transition만 활성화되고 button의 onclick 딜리게이트가 멀티캐스팅이 되지않음(완)
+-> 일단은 임시 대응으로 Canvas Group, block raycast를 해제하면 text와 동시에 button이 눌려짐

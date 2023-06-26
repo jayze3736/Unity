@@ -1,0 +1,66 @@
+1. img.color.a를 대입하지 못하는 이유는?, img.color.a에 어떤 값을 대입하면 img.color가 변수가 아니라고 표시됨
+2. 자신의 클래스에서 다른 child object(Text)를 불러와서 text의 color값을 변경해야함
+부모에서 변경사항이 생겼을때 child에게 알리고 이에 변경사항에 대한 child 처리를 설계하려면 어떤방식으로
+하는것이 좋을까
+
+3. 최악의 상황 발생: 
+text 1
+	text 3
+text 2
+button 1
+	text 4
+
+처음 Paragraph p = {text 1, text 2, button1}으로 만들고 다음 p2 = {text 4}로 만들면, text1에서 다음 파라그래프를 이동할때
+p3 = {text 3}를 만들지 않고 p2로 이동함
+
+//PageableUI의 GetNextParagraph에서 
+int curindex = paragraphs.IndexOf(curparagraph);
+        if (curindex < (paragraphs.Count - 1))
+        {
+            nextparagraph = paragraphs[curindex + 1];
+            curparagraph = nextparagraph;
+            return nextparagraph;
+        }
+이부분이 현재 문제를 유발하고있음
+
+solution 1. GetNextParagraph에서 item의 transform을 입력으로하기때문에 Paragraph에 child pargraph를 두어, parargraph 생성시
+child를 지정하고 chlid가 없을때의 처리를 추가적으로 해줌
+-> prevParagraph를 parent로 설정
+
+solution 2. IHelperPointable 인터페이스에 childParagraph를 캐슁해놓을 수 있도록 해놓고, GetNextParagraph에서 item을 참조하여
+childParagraph가 존재할 경우 다음 파라그래프로 childParagraph를 반환,
+돌아가는 경우 
+원인: 아이템마다 세부적으로 들어가는 paragraph가 다른데, 그 아이템들은 공통적인 paragraph로 묶여져 있어서 childparagraph는
+상위로 돌아갈때(prev) 하나의 paragraph로 이동하기만하면 되는데, 그 아이템에서 다음 파라그래프로 들어갈때는 아이템마다
+paragraph가 다르기때문에 이럼
+
+4.
+text 1
+	text 3
+text 2
+button 1
+	text 4
+
+p1 = {text1, text2, button 1}
+p2 = {text 3}
+
+p3 = {text 4}
+
+p2의 parent: p1, chlid: null
+p1의 parent: null, child: p1 -> p2
+p3의 parent: p1, child: 
+
+
+-> 이거 해결했음 동영상 첨부할거임
+
+
+1). Paragraph.cs(완)
+236번째 줄: nextParagraphRefDict.Add(curitem, nextparagraph); -> curitem이 명시적으로 null이 아니란 보장이 없음(나는 알지만 외부에선 모를 수 있음)
+GetNextParagraph(Transform item, List<Paragraph> paragraphs, bool enableDFS) -> item의 type이 명시적으로 IHelperPointable 컴포넌트가 존재하는지 명시적으로
+작성을 어떻게 할 수 있을까
+-> 이거 걍 다 바꿨음
+
+2). GetNextParagraph, GetPrevParagraph -> paragraph 클래스로 이동(완)
+
+
+

@@ -1,0 +1,17 @@
+//Quest
+1. 버튼과 text가 겹쳐있는 오브젝트를 분리하여 버튼을 눌렀을때는 오로지 text만 클릭되게하고(버튼은 클릭 안되게하고 자신 이외의 모든 버튼은 클릭이 불가능하도록 만들어야함 또는 클릭애니메이션이 없도록)
+버튼을 클릭하지않은상태에서는 오로지 버튼만 클릭되도록한다.
+
+2. Helper가 현재 가리키고있는 오브젝트의 child를 반환하여 track을 들어가는(Enter) 기능의 반대인 자신의 parent로 나올수(Quit)있는 기능을 만들자
+
+3. UI helper의 Update문에서 UI event를 일으키지말고, IpointerClick 이벤트처럼 특정 키를 입력했을때 일으킬 수 있는 유니티 메소드가 있는지 확인하자.
+
+//Answer
+1. Button 오브젝트의 raycast target을 false로 설정하면 button이 raycast 대상이 아니게 되면서 입력을 못받게된다. 또는 Button 컴포넌트의 Interactable(bool)값을 false로
+설정하면 button이 클릭되는 것을 막을 수 있다. text에는 OnPointerClick()과 같은 마우스 클릭시 발생하는 이벤트함수를 설정하면 Button에 대한 마우스 입력은 배제하고 Text만
+클릭할 수 있게된다.
+
+2. SetGuideState()가 들어갈때의 이벤트이고 SetDefaultState()가 나갈때의 이벤트이다.
+
+3. 찾아봤는데 결국없었다. 근데, 커스텀 UI 관리창(UI inspector)을 만들때 키보드 입력에 대한 이벤트를 설정하고 추가하는 기능은 존재하지만 Runtime에서 게임 오브젝트에 대한
+키보드 입력 이벤트를 설정하는 방법은 Input.GetKey()를 사용하는 방법밖에 없는 것 같다.

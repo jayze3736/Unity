@@ -1,0 +1,12 @@
+1. Book 클래스에 구현한 viewClickedPage를 이용하여 현재 페이지를 클릭한 페이지로 참조할 수 있도록 해야한다.(완)
+(1) 현재 감 잡히는 방법은 PageableUI가 Canvas를 가지고 있으니까, raycast 대상을 Canvas로 하는방법
+(2) 어떤 물체를 클릭하면 해당 오브젝트의 최상위 오브젝트인 PageableUI를 가져와서 해당 페이지로 참조시키는 방법
+
+-> (1)번과 유사한 방법으로 해결했는데, 런타임중에 EventSystem이라는 오브젝트를 보면 현재 마우스의 정보를 확인할 수 있다. 마우스의 정보는 마우스가 사용중인 raycast 정보와
+PointerEventData 에 해당한다. raycast 정보중에 CurrentRaycast라는 것이 있는데, 이는 현재 마우스 위치의 raycast 정보를 의미한다.
+CurrentRaycast에 module이라는 필드가 있는데, 이는 BaseRaycaster라는 Raycaster 클래스이다. Raycaster에는 크게 두가지가 있다. Graphic Raycaster와 Physics Raycaster가 있는데, 
+전자는 Canvas위의 오브젝트들이 raycast 되었는지 감시하고 이에 대한 정보를 EventSystem에 전송해서 어느 오브젝트의 이벤트를 발생시켜야되는지 알아내는데 도움을 준다.
+따라서 Canvas마다 일반적으로 Graphic Raycaster가 존재하는데, 이 Graphic Raycaster는 BaseRaycaster를 상속받으므로 만약 어떤 Canvas 위의 오브젝트에 마우스를 갖다대면
+module 필드에 Canvas 오브젝트가 세팅된것을 확인할 수 있다. 따라서 이러한 점을 이용해서 마우스를 사용자가 클릭했을때 그 지점의 CurrentRaycast 정보를 가져와 module 필드값을
+읽고 해당 canvas의 pageableUI 컴포넌트값을 받아와서 해당 페이지를 Book 클래스에서 처리하도록 하면된다.
+

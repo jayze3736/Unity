@@ -1,0 +1,8 @@
+Animation Manager
+
+1. 투명도가 점차 줄어드는 경우 -> script로 작성가능, Coroutine과 투명도가 줄어드는 시간을 입력으로 하여
+코드를 작성할 수 있을 것 같음
+
+for(i=0;i < x; i++)
+alpha--;
+return yield new waitforsec;

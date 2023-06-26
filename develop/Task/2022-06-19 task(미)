@@ -1,0 +1,106 @@
+주말에 git알아보고 Jekyll 수정하는법 알아내느라 고생했다.
+jekyll 뭔가 모르겠으면 홈페이지에서 F12누르고 개발자옵션으로 들어가보셈
+
+1. github.io(완)
+-1. 카테고리, 테마 수정
+-2. 글 옮기기(이거나중에)
+2. git 레포지토리 clone(완)
+-1. vscode 로컬 저장소 삭제
+-2. vscode home 디렉토리 변경
+-3. vscode gittest 리포지토리 clone해보기
+3. unity c# reference code(-) -> 이거 해봤는데 내가 원하는 코드가 없음, 원래는 BaseInputModule을 보려고했는데 이게 배포하는 프로젝트에는 없고 말 그대로
+유니티 엔진, 에디터 소스가 있음
+
+
+github-pages 226 | Error:  Could not locate the included file 'icon-github.html' in any of
+["/github/workspace/_includes", "/usr/local/bundle/gems/jekyll-theme-primer-0.6.0/_includes"]. 
+Ensure it exists in one of those directories and is not a symlink as those are not allowed in safe mode.
+
+- 명령어
+git remote add 리포지토리명: 리포지토리를 원격 저장소에 추가
+git remote -v: 추가된 원격저장소 목록 확인
+git remote rm 별명: 원격저장소 제거
+pwd: 현재 디렉토리 확인
+ls: 현재 파일 위치에 존재하는 파일들 모두 출력
+pull과 fetch: 원격 저장소에서 로컬 저장소로 소스를 가져온다.
+pull은 가져올 소스가 가지고있는 소스보다 버전이 높다면 가져올 소스로 merge(병합)하고
+fetch는 가져오고 fetch는 하지않는다.
+git status: 파일의 상태를 확인한다. tracking 여부 그리고 modified 여부를 확인한다. 현재 브랜치 위치도 확인가능
+참조: https://dololak.tistory.com/304
+git commit editor: git 커밋 메세지를 작성하는 에디터인듯, insert mode는 i를 누르고 커밋 메세지를 작성하면 되고, 작성 모드를 벗어나려면 esc를 누른다.
+save하고 커밋하려면 :x!를 명령창에 입력하면되고 세이브하지않고 되돌아가려면 :q!을 누르면된다.
+git cat 파일명: 파일 변경 내용 확인
+git restore --staged 파일명: 현재 스테이징된 파일 스테이징 취소
+git add 파일: 파일을 스테이징한다.
+참고: 파일을 스테이징하면 인덱스라는 공간에 파일을 올리게된다. git의 커밋은 스테이징된 파일만을 커밋할 수 있는데, 만약 어느 파일이 인덱스라는 공간에 올려지고 
+git restore 파일: 변경된 파일을 원래상태로 돌려놓음
+git fetch (별명): 원격 저장소의 변경 코드를 내 로컬 저장소에 업데이트하지않고 fetch 브랜치로 임시로 저장해 놓는 작업
+git pull (원격 저장소 이름) (원격 저장소 브랜치): 원격 저장소의 변경 코드를 그대로 내 로컬 저장소에 업데이트하는 작업
+git push (별명) (브랜치명): 저장된 커밋을 원격 저장소에 업데이트
+git log: commit 이력 출력, Q는 로그 기록 조회 나가기, 위 아래 방향키로 커밋 기록 조회
+git diff (로컬 브랜치) (원격 브랜치): 두 브랜치 커밋 차이 비교, origin은 origin/HEAD로 parse됨
+https://stackoverflow.com/questions/22259977/what-is-git-diff-origin-master-supposed-to-do
+git checkout (브랜치): 해당 브랜치로 이동(* 현재 이동한 브랜치에서 merge (브랜치) 또는 merge (원격 저장소 이름) (원격 저장소 브랜치 명)으로 병합가능)
+git merge (tab): fetch될 브랜치 대상확인
+git merge (원격 저장소 이름) (원격 저장소 브랜치)
+﻿git checkout -p [가져올 파일이 있는 branch명] -- [가져올 파일 경로]: 특정 파일 병합
+https://junhobaik.github.io/git-specific-files-merge/
+git branch: 로컬 브랜치 조회
+git branch -r: 원격 브랜치 조회
+git branch -a: 모든 브랜치 조회
+
+git revert: 커밋 지우기
+--amend: 커밋 수정하기
+
+참조: https://backlog.com/git-tutorial/kr/stepup/stepup6_2.html
+
+- fetch 작업
+git fetch 별명
+
+git branch -r: fetch를 확인할 수 있는 브랜치 조회
+git branch: 모든 브랜치 조회
+
+git checkout (해당 fetch 브랜치 ex: origin/main):  해당 브랜치 조회-> 변경사항 확인가능
+
+- 용어
+Git은 소스 버전 관리 시스템이며, 여러사람들이 원격저장소에 소스를 가져오고(pull) 수정하면서(push) 소스를 계속 업데이트 해나가는 시스템이다.
+원격 저장소가 존재하며 처음에 사람들은 이 원격 저장소를 내 로컬 저장소에 가져와(clone) 소스를 모두 복사하여 로컬 저장소에 저장하고 소스를 수정하여 원격저장소에 push한다.
+원격 저장소: 소스 본진
+로컬 저장소: 원격 저장소를 복사하여 수정하는 저장소
+
+수정한 파일을 먼저 인덱스라는 공간에 스테이징한다. 스테이징은 변경한 파일중 최종적으로 어느 파일의 변경사항을 실제 로컬 저장소에 등록할 것인지 정하는 과정이다.
+인덱스는 로컬 저장소와 작업 공간(work tree)사이에 존재하는 가상의 공간으로 변경사항을 등록할 파일을 임시적으로 저장하는 공간을 의미한다.
+그리고 이 인덱스에 저장된 파일들을 커밋하여 자신의 로컬 저장소에 변경사항을 적용시킨다.
+
+정리하자면, 파일 수정 -> 여러개의 변경된 파일중 실제 변경사항을 적용할 파일을 골라 스테이징 -> 인덱스라는 공간에 임시로 저장됨 -> 인덱스에서 커밋하여 로컬 저장소에 변경사항 적용
+push는 자신의 로컬 저장소를 원격 저장소에 공유하는 작업을 의미한다.
+pull(/fetch)는 원격 저장소에서 로컬 저장소로 데이터를 받아오는 작업을 의미한다.
+
+- .git 파일
+.git 파일 없이는 git을 사용할 수가 없고 git은 .git파일을 이용해서 커밋, 푸시, 풀 모든 git의 기능을 사용한다. 리포지토리마다 존재한다. 
+
+- VsCode
+나는 진짜 vscode 진짜 쌩 초보라서 솔루션을 검색하고 찾아서 실험해보는것 밖에 못함. Vscode를 열면 실행되는 시작 경로를 바꾸는 방법을 검색하고있었는데 알고보니 그냥 폴더 열기를 눌러서 원하는 폴더로
+이동하면 되는거였음
+
+terminal을 gitbash로 바꾸는 방법도 계속검색해봤음. settings.json 파일을 바꾸라는 말이많은데, 나는 그냥 터미널에서 새 터미널 - 아래 터미널에 보면 + 버튼을 누르면 터미널이 추가가되고 이걸 bash로 바꿔줬음
+기본 터미널을 설정할때도 +버튼의 아래방향화살표 버튼을 누르면 기본 프로필 선택을 누르면 git bash로 기본 터미널로 바꿀 수 있음
+
+참고: https://stackoverflow.com/questions/42606837/how-do-i-use-bash-on-windows-from-the-visual-studio-code-integrated-terminal
+
+문제:
+git status 명령어를 입력하면 다음과 같은 에러가 발생
+
+warning: could not open directory 'Application Data/': Permission denied
+warning: could not open directory 'Cookies/': Permission denied
+warning: could not open directory 'Local Settings/': Permission denied
+warning: could not open directory 'My Documents/': Permission denied
+warning: could not open directory 'NetHood/': Permission denied
+warning: could not open directory 'PrintHood/': Permission denied
+warning: could not open directory 'Recent/': Permission denied
+warning: could not open directory 'SendTo/': Permission denied
+warning: could not open directory 'Templates/': Permission denied
+warning: could not open directory '시작 메뉴/': Permission denied
+
+해결:
+

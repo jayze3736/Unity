@@ -1,0 +1,89 @@
+# Main Subject: 세이브 데이터를 관리하는 SaveData 클래스의 코드 일관성을 유지하기 위해 세이브 로드 시스템을 구축하는 방법
+
+- 세이브 파일을 분리할 수 있는 방법은 없을까? 막말로 클래스에서 세이브 기능을 사용할때 객체의 클래스명으로 하나의 조각 파일을 저장하도록하여
+하나의 세이브 파일에 각 클래스명의 세이브 조각 파일이 여러개 들어있도록 만들면 로드할때 구별된 파일명대로 데이터를 받으면 되지않나?
+즉, 포인트는 저장하는 객체끼리 구별을 하면 데이터를 쉽고 빠르게 받을 수 있을 것같음
+
+- JSON 파일 형태로 저장(Not Binary Formatter), Parse를 통해 데이터 가져옴
+1. JSON 파일로 저장
+2. 전역 대리자 인스턴스 존재하여 해당 인스턴스에 object 리스트 형태로 저장한다. 또는 object 따로따로 저장(not list)
+3. 
+
+# Custom Serialization을 할때 주의점
+https://docs.unity3d.com/2019.4/Documentation/Manual/script-Serialization-Custom.html
+이 링크에 나온 예제에 따르면, Serialization을 할때 null값을 지원하지 못하는 탓에 클래스의 직렬화 크기가 커지는 경우 문제가 발생한다.
+
+ [Serializable]
+    public class Node {
+        public string interestingValue = "value";
+        //The field below is what makes the serialization data become huge because
+        //it introduces a 'class cycle'.
+        public List<Node> children = new List<Node>(); // children도 
+    }
+
+다음과 같이 Node로 정의한 클래스 내부에 자신의 클래스 객체 리스트 children을 가지게되면 Node라는 클래스를 직렬화하는 과정에서 퍼포먼스 이슈로 인해
+매우 느린 직렬화가 된다고 한다.
+
+
+
+# Unity Editor의 사용법과 사용용도에 관해 생각해보기 - 특히 세이브 관점에서
+- 일단 먼저 세이브와 로드가 어느 시점에서 이루어지는지 생각해봐야한다.
+세이브는 당연히 런타임 도중에 발생한다. 로드의 경우 두가지가 존재하는데, 런타임도중에 로드를하고 해당 파일을 불러오는 경우와 이미 존재하는 세이브 파일을 읽어서 캐싱을 해놓고 런타임
+중에 로드를 하는 경우가 존재한다.
+
+- Unity Editor 클래스는 Custom Editor를 만들어서 유저에게 어떠한 동작 또는 설정 기능을 제공하도록 한다. 즉, 런타임 이전에 Unity Editor를 사용하여 config를 설정하는데,
+만약 이 Editor 내의 설정을 통해 게임 내의 오브젝트와 세이브 파일의 메타 데이터를 올바르게 매칭할 수 있다면 Editor를 이용하여 세이브 파일을 로드할 수 있을 것 같다.
+
+
+
+
+# UIBase라는 클래스가 존재하는가?
+
+# ScriptableObject의 기능에 대해서 정확하게 알아보기
+1. CreateAssetMenuAttribute
+간혹 다른 사람 코드를 보면 클래스 바로위에 [ ]으로 선언된 부분이 있는데 이 부분에 선언하는 코드를 Attribute라고 하나봄(확실치는 않음)
+CreateAssetMenuAttribute는 .asset 파일을 생성하여 ScriptableObject를 상속받는 오브젝트의 에셋 데이터를 정의한다. Editor의 submenu로 접근가능하다.
+
+2. ScriptableObject
+ScriptableObject는 그대로 사용하지않고 상속해서 사용한다. 상속받은 클래스에서는 생성할 프리팹 또는 게임오브젝트의 정보를 정의한다.
+예를 들면, AssetData : ScriptableObject 처럼 상속받게 하고 스폰위치(Spawn Pos), 스폰 개수, 오브젝트 이름 등 스폰할 오브젝트의 정보를 정의한다.
+(AssetData는 custom class)
+
+3. ScriptableObject의 생성
+Spawner라는 코드를 생성하고 AssetData 클래스의 .asset 파일을 참조하게한다. 해당 파일을 참조하여 파일내에 정의한 데이터대로 Spawner에서 인스턴스화한다.
+
+4. .asset 파일이란?
+- texture, mesh 등의 게임 리소스를 저장하는 파일: 쉽게 얘기해서 오브젝트를 구성하는 데이터를 의미한다.
+메타파일은 오브젝트의 위치, 참조하고있는 데이터 등 오브젝트의 정보를 의미하는 반면
+.asset 파일을 데이터를 구성하고있는 물리적 데이터 예를 들면 텍스쳐, 머테리얼, 쉐이더 등을 의미한다.
+사람으로 비유를하자면, 사람의 주민등록번호, 거주지, 이름등은 meta 데이터라고 보면 되고
+사람의 장기, 뇌, 피부 등은 사람을 구성하는 .asset 파일이라고 보면되겠다.
+
+5. 게임 리소스란?
+- 게임내에서 사용하는 데이터: 게임 재화, 뒤의 배경 이미지, 캐릭터 이미지 등 
+
+# https://everyday-devup.tistory.com/87 블로그에서 보았듯이 오브젝트의 reference를 저장하여 관리하는 것이 가능한가?
+
+# 지시문 using이 아닌 문장에서의 using 기능
+
+1. Disposable 클래스
+관리되지않는 자원의 메모리 할당을 해제하기위한 메소드를 제공하는 클래스, Dispose() 함수를 통해 할당을 해제한다.
+File.Close()와 동일한 개념
+
+GC는 자동적으로 관리대상의 자원을 더이상 사용하지않으면 메모리에서 할당을 해제한다. 그러나 GC가 자주 호출되는 것도 전체적인 성능에 영향을 미치며, 관리대상이 되지않는
+데이터를 알아서 해제가 불가능하기때문에 코드 작성자가 직접 해제를 해야 해제 시점도 명확하고 자원 낭비가 되지않을 수 있다.
+
+2. using과 Dispose()
+using은 사용할 namespace를 선언하는데도 사용하지만, Disposable 객체와 함께 사용하기도 한다. using(객체 할당){처리...} 형태로 사용하며 할당한 객체는 { } 블록 밖을 벗어나면
+서 할당을 해제(반납)한다.
+
+
+# FileStream이란, 필요성
+FileStream은 입출력의 매개체로, IO와 Memory 사이에서 데이터의 흐름을 관리한다. 
+
+
+## StringBuilder 클래스
+자세히는 보지않았지만 String 객체끼리의 연산이 오버로드가 커서 이러한 부분을 개선하여 String 타입을 사용하면서 연산을 더 빠르게 지원을 해주는 클래스인것 같다.
+ex) "string" + "append"와 같은 연산
+
+

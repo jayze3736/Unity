@@ -1,0 +1,25 @@
+queue의 설계
+
+1. UI의 slot 개수로 queue의 크기를 초기화
+2. queue의 크기를 정하고 UI의 slot을 동적 생성 - 문제: slot들을 간격에 맞추어 정렬해야되므로 layout이 필요한데, 이 layout은 정적인
+slot 개수에 비효율적임
+
+- menu 버튼을 눌렀을때 해당 UI 활성화
+- 
+
+
+
+1번 선택시
+
+1> UI slot 수 = Slots의 childcount값을 itemManager의 queue의 크기로 초기화
+2> UI 비활성화
+3> 플레이어가 아이템 습득시 queue에 push
+4> 플레이어가 inventory를 열었을때 UI를 활성화하고 queue에 존재하는 값들을 pop하여 각 오브젝트들의 parent를 slot으로 지정한다.
+이때 pop을 할때 더 이상 slot에 남은 공간이 존재하지않을때 
+
+Slot이 꽉차서 인벤토리에 아이템을 습득해도 습득되지않도록 하는 방법
+
+현재 빈 slot이 몇개있는지 확인 = emptyslotcount
+queue의 count가 emptyslotcount보다 클 경우 아이템을 습득하지않도록한다.
+
+sprite renderer component들을 disable하는 경우 HideGraphics

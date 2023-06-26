@@ -1,0 +1,2 @@
+object의 scale은 단순히 크기값을 말하는 것이아니라, 좌표계의 scale도 커진다. 예를 들어서 기존 좌표계의 x축을 scale값이 4가 되면 1,2,3,4.. 가 아니라 4,8,12,16 이 된다.
+따라서 scale값을 막 바꾸다간, child object의 local position값 배율이 달라지므로 이에 주의해야한다.

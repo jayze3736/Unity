@@ -1,0 +1,20 @@
+call back function
+1. 다른 함수의 인자로서 사용되는 함수
+2. 어떠한 이벤트 이후 실행되는 함수
+
+try catch finally에서 finally는 try catch의 실행이후 항상 실행되는 블록인데 이처럼 call back 함수는 어떠한 함수내의 작업 수행후 실행되는 함수를 의미한다.
+
+콜백함수의 장점: 함수를 인자로 설정하므로써 실행될 함수의 종류를 선택하는 것이 가능하다. 예를 들면
+func(function callback)
+{
+
+//task
+//...
+
+
+callback();
+}
+
+다음과 같이 선언하면 func(ex1), func(ex2) 등 해당 위치에 실행될 함수를 정할 수 있다.
+
+참조: https://satisfactoryplace.tistory.com/18

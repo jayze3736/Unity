@@ -1,0 +1,29 @@
+1. Text의 OnpointerClick, Button의 Onclick등 UIhelper가 현재 참조하고있는 아이템의 paragraph안에서 클릭이 이루어져야하는데, paragraph와 별개로 클릭 이벤트를
+외부에서 정해주면 EventSystem에서는 한정된 아이템이아니라 모든 아이템들의 Event를 발생시키기때문에 이에대한 조치를 해줘야함 
+다시 말해서 나는 현재 참조중인 paragraph 내에 존재하는 아이템들만 raycast를 받게하고 싶음(완)
+
+-> 먼저 모든 item들의 raycast input을 모두 무시하도록 초기화시키고 런타임에 다음 파라그래프를 반환 또는 생성하면 이전 paragraph 아이템들은 raycast input이 모두 비활성화되고
+다음 파라그래프 아이템들은 raycast input을 모두 활성화시켜서 해당 파라그래프의 아이템들만 입력을 받게하고 이외의 아이템들은 모조리 raycast를 무시하게 만든다.
+(각 아이템에서 수동으로 OnParagraphChanged 이벤트리스너에 이벤트를 추가시켜서 파라그래프가 바뀔때마다 해당 이벤트를 실행시키려고 생각해봤었는데, 이렇게되면 IHelperPointable을
+상속받는 모든 오브젝트들이 파라그래프가 바뀔때마다 자신의 현재 paragraph ignore 여부를 똑같아도 참조해서 바꿔야하는 부분이 있고 오버헤드가 많이 들어갈거라 생각되어
+IHelperPointable 내에 OnInteractable, OnNonInteractable 메소드를 선언하여 파라그래프가 바뀔때 이전 파라그래프의 아이템과 바뀔 파라그래프의 아이템을 대상으로만
+paragraph ignore 여부를 바꾸어 오버헤드를 줄이고자 계획)
+
+
+2. Page를 여러개 생성하고 DoublyLinkedList가 정상적으로 작동하는지 확인(-) -> 이거 page 여러개 받을수있도록 환경 구성한 다음에 작동확인해야함
+
+
+3. paragraph 대신에 UIHelper 동작을 Tree 구조로 할 수 있을까(완)
+-> 생각을 해봤는데 Tree로 하는 것과 paragraph로 하는것과 똑같음, 왜나하면 이진 트리는 left child, right child 둘다 있어서 탐색 시간 복잡도를 줄일 수 있는데, 현재 구현할 수
+있는 input 데이터들이 이진 트리가 아니라, child가 여러개인 Tree라서 노드내에 child array를 사용하는 것과 paragraph로 item array를 사용하는것과 동일함
+
+4. image raycast target 과 button.interactable의 차이는?(완)
+-> 일단 먼저 raycast가 Button을 향해 사출이되면 두개의 raycast target 오브젝트가 raycast를 막는다.(blocks) 하나는 image 컴포넌트고 하나는 button 컴포넌트인데,
+image raycast target은 해당 image가 raycast 대상이 될건지를 설정하는 flag이고 button interactable은 마우스 입력을 받을것인지에 대한 flag이다. 
+따라서 버튼이 raycast를 받았을때 button에 관한 raycast 서비스 루틴을 제외하려면 interactable을 false로 세팅하면되고 단순히 image가 raycast 대상이 안되게하려면 raycast targe
+t을 false로 설정하면된다. 
+(image는 onclick과 같은 click 관련 이벤트 핸들러가 기본적으로 없지만 image가 raycast 대상이되면 eventsystem에서 해당 대상을 클릭중인 또는 마우스커서가 위에 있는 오브젝트로
+검출하는 것이 가능)
+
+5. text를 누르면 text를 통과하여 button을 클릭할 수 있는 방법(완) -> text의 raycast target을 false로 두면 text를 raycast 대상에서 제외하면서 해당 text 위치를 클릭하면 text가 
+아니라 버튼을 클릭할 수 있게된다.

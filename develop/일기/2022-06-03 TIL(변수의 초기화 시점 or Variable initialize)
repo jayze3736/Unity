@@ -1,0 +1,9 @@
+1. 변수의 초기화 시점을 선언과 동시에 하는 경우와 Awake()에서 하는 경우의 차이
+Awake()함수는 씬에서 오브젝트를 모두 로드한 시점과 Start(), OnEnable()함수 호출 시점 사이에 호출이 된다.
+변수 초기화를 선언과 같이하는 경우에는 복잡한 계산 과정을 추가하는 것이 불가능하다. 그러나 Awake()함수에서 초기화를 하면 다른 오브젝트의 값을 받아와서 계산을 한다던가
+복잡한 알고리즘을 통해 산출한 값으로 초기화가 가능하다.
+결론적으로 얘기하면, Awake() 함수에서 초기화를 권장할때는 초기화에 필요한 데이터가 가공이 필요한 경우에 해당한다.
+
+여담으로 Start()함수에서 초기화를 권장하는 경우는 Update() 그리고 FixedUpdate() 이전, 그리고 Awake() 함수 호출후에 초기화가 필요한 경우에 해당한다.
+
+https://gamedev.stackexchange.com/questions/181519/initializing-variables-difference-between-awake-and-in-class-initialization
